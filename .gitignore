@@ -1,0 +1,14 @@
+LangBackend/x64/
+LangBackend/.vs/
+LangBackend/.backend_tree.gv.swp
+LangBackend/LangBackend.sln
+LangBackend/LangBackend.vcxproj
+LangBackend/LangBackend.vcxproj.filters
+LangBackend/LangBackend.vcxproj.user
+
+ProgrammLang/.vs/
+ProgrammLang/x64/
+ProgrammLang/ProgrammLang.sln
+ProgrammLang/ProgrammLang.vcxproj
+ProgrammLang/ProgrammLang.vcxproj.filters
+ProgrammLang/ProgrammLang.vcxproj.user

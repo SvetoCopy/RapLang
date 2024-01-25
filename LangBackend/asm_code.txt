@@ -1,0 +1,26 @@
+
+; the next operator has gone from 1 line
+while_condition_1:
+PUSH 1.000000
+PUSH 0
+JE end_while_2
+
+; the next operator has gone from 1 line
+PUSH 2.000000
+POP [0]
+
+; the next operator has gone from 1 line
+PUSH [0]
+PUSH 2.000000
+ADD
+POP [1]
+
+; the next operator has gone from 1 line
+PUSH [0]
+PUSH 2.000000
+ADD
+PUSH [1]
+ADD
+POP [2]
+JMP while_condition_1
+end_while_2:
