@@ -8,7 +8,6 @@ const int INIT_TABLE_CAPACITY = 100;
 enum NameTableElemType {
 	KEYWORD  = 0,
 	VARIABLE = 1,
-	FUNCTION = 2
 };
 
 struct NameTableElem {
@@ -23,8 +22,17 @@ struct NameTable {
 	size_t		   size;
 };
 
+struct ProgrammNameTables {
+	NameTable* local_tables;
+	NameTable  funcs;
+	size_t	   size;
+};
+
 void NameTableCtor(NameTable* name_table);
 void NameTableDtor(NameTable* name_table);
+
+void ProgrammNameTablesCtor(ProgrammNameTables* table);
+void ProgrammNameTablesDtor(ProgrammNameTables* table);
 
 void NameTableInsertVar(NameTable* name_table, const char* name);
 #endif // !

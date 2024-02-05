@@ -38,7 +38,13 @@ enum ExprElemType {
 	COMMAND  = 1,
 	VAR		 = 2,
 	OPERATOR = 3,
+	FUNCTION = 4,
 	DELETED  = -1
+};
+
+struct Func_t {
+	const char* name;
+	size_t      args_count;
 };
 
 struct ExprVar {
@@ -50,6 +56,7 @@ union Value_t {
 	ExprVar var;
 	int     operator_type;
 	double  imm_value;
+	Func_t  func;
 };
 
 struct ExprElem {

@@ -8,29 +8,45 @@ int ReadExprElem(char* str, Node** node) {
 	double  double_elem	   = 0;
 	int     elem_read_size = 0;
 	size_t	line_num	   = 0;
-	int     read_arg_count = sscanf(str, " %lf[%zu] %n", &double_elem, &line_num, &elem_read_size);
+	int     node_type	   = 0;
+	int     read_arg_count = sscanf(str, " %lf line = %zu type = %d%n", 
+									&double_elem, 
+									&line_num, 
+									&node_type,
+									&elem_read_size);
 
 	if (read_arg_count == 0) {
 
 		elem_read_size = 0;
 		char str_elem[MAX_NODEINFO_SIZE] = {};
-		read_arg_count = sscanf(str, " %[^[][%zu] %n", &str_elem, &line_num, &elem_read_size);
+		read_arg_count = sscanf(str, " %s line = %zu type = %d%n", 
+								&str_elem, 
+								&line_num,
+								&node_type,
+								&elem_read_size);
 
 		if (strcmp(str_elem, DEFAULT_NIL) == 0) {
 			*node = nullptr;
+			return 1;
 		}
 
-	#define DEF_OPERATOR(cmd_name, str_command, cmd_code, ...)  \
+		#define DEF_OPERATOR(cmd_name, str_command, cmd_code, ...)  \
 															    \
         else if (strcmp(str_elem,  str_command) == 0) {         \
 			ExprElem data = CreateExprOperator(cmd_code);       \
 			*node = OpNew(data);                                \
 		}
 
-	#include "../../def_operator.h"
-	#undef DEF_EXPR_CMD
-		else {
+		#include "../../def_operator.h"
+		#undef DEF_EXPR_CMD
+
+		else if (node_type == VAR) {
 			ExprElem data = CreateExprVar(str_elem);
+			*node = OpNew(data);
+		}
+
+		else if (node_type == FUNCTION) {
+			ExprElem data = CreateExprFunc(str_elem);
 			*node = OpNew(data);
 		}
 	}
@@ -188,18 +204,6 @@ int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size
 	
 	int res_size = 0;
 
-	while (*str != '{') {
-		str++;
-		res_size++;
-	}
-
-	char name_table_str[MAX_NAMETABLE_SIZE] = "";
-
-	int table_str_size = 0;
-	sscanf(str, "{%[^}]%n", &name_table_str, &table_str_size);
-
-	res_size += table_str_size;
-
 	int name_table_iter = 0;
 
 	for (size_t i = 0; i < name_table_size; i++) {
@@ -209,7 +213,7 @@ int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size
 		NameTableElemType type				  = KEYWORD;
 
 		int read_size = 0;
-		sscanf(name_table_str + name_table_iter, " [\"%[^\"]\", %d, %d%n", &name, &code, &type, &read_size);
+		sscanf(str + name_table_iter, " [\"%[^\"]\", %d, %d%n", &name, &code, &type, &read_size);
 
 		name_table->table[i].name    = _strdup(name);
 		name_table->table[i].code    = code;
@@ -219,24 +223,42 @@ int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size
 		name_table_iter += read_size + 1;
 	}
 
-	return res_size + 1;
+	return res_size;
 }
 
-void ReadTree(FileInfo* file, NameTable* name_table, Tree* tree) {
+void ReadTree(FileInfo* file, ProgrammNameTables* table, Tree* tree) {
 
-	assert(name_table != nullptr);
+	assert(table != nullptr);
 	assert(file != nullptr);
 	assert(tree != nullptr);
 	
 	ReadFile(file);
 
-	size_t table_size = 0;
-	int read_size = 0;
-	sscanf(file->buff, "NameTable [%d%n", &table_size, &read_size);
+	// Read func table
+	char   func_table_str[MAX_NAMETABLE_SIZE] = "";
+	int	   read_size					  = 0;
+	size_t func_table_size				  = 0;
 
+	sscanf(file->buff, "Functions [%zu] {%[^}]}%n", &func_table_size, func_table_str, &read_size);
+
+	ReadNameTable(func_table_str, &(table->funcs), func_table_size);
 	file->buff += read_size;
-	file->buff += ReadNameTable(file->buff, name_table, table_size);
-	name_table->size = table_size;
+	
+	for (int i = 0; i < func_table_size; i++) {
+
+		char   local_table_name[MAX_NAMETABLE_SIZE] = "";
+		char   local_table_str[MAX_NAMETABLE_SIZE]  = "";
+		size_t local_table_size					    = 0;
+
+		read_size = 0;
+
+		sscanf(file->buff, "%s [%zu]{%[^}]}%n", local_table_name, &local_table_size, local_table_str, &read_size);
+
+		ReadNameTable(func_table_str, &(table->local_tables[i]), local_table_size);
+		file->buff += read_size;
+	}
+
+	table->size = func_table_size;
 
 	while (*(file->buff) != 'T') file->buff++;
 

@@ -4,8 +4,8 @@
 
 int main()
 {
-    NameTable name_table = {};
-    NameTableCtor(&name_table);
+    ProgrammNameTables name_table = {};
+    ProgrammNameTablesCtor(&name_table);
 
     FileInfo file_info = FileInfoCtor("../tree.txt");
     Tree tree = {};
@@ -15,12 +15,12 @@ int main()
     printf("aaa");
     ReadTree(&file_info, &name_table, &tree);
 
-    TreeGraphicDump(&tree);
+    ShowGraphicDump(tree.root, "24_example.gv");
 
     FILE* file_asm = {};
     fopen_s(&file_asm, "asm_code.txt", "w");
 
-    RetranslateTreeToASM(&tree, file_asm, name_table);
+    // RetranslateTreeToASM(&tree, file_asm, name_table);
 
     return 0;
 }

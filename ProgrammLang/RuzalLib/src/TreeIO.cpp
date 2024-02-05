@@ -109,9 +109,9 @@ void PrintOperator(Node* oper, FILE* file) {
 	assert(file != nullptr);
 
 	switch (NODE_CMD_CODE(oper)) {
-		#define DEF_OPERATOR(name, command, code, ...)      \
-		case code:									        \
-			fprintf(file, command "[%zu]", oper->line_num);	\
+		#define DEF_OPERATOR(name, command, code, ...)									\
+		case code:																		\
+			fprintf(file, command " line = %zu type = %d", oper->line_num, OPERATOR);	\
 			break;
 		#include "../../def_operator.h"
 		#undef DEF_OPERATOR
@@ -133,7 +133,7 @@ void SaveNode(Node* node, FILE* file, int rec_level) {
 	fprintf(file, "(");
 
 	if (GET_NODE_TYPE(node) == VAR) {
-		fprintf(file, "%s[%zu]", NODE_VAR_NAME(node), node->line_num);
+		fprintf(file, "%s line = %zu type = %d", NODE_VAR_NAME(node), node->line_num, VAR);
 	}
 
 	else if (GET_NODE_TYPE(node) == OPERATOR) {
@@ -141,7 +141,11 @@ void SaveNode(Node* node, FILE* file, int rec_level) {
 	}
 
 	else if (GET_NODE_TYPE(node) == NUM) {
-		fprintf(file, "%lf[%zu]", NODE_IMM_VALUE(node), node->line_num);
+		fprintf(file, "%lf line = %zu type = %d", NODE_IMM_VALUE(node), node->line_num, NUM);
+	}
+
+	else if (GET_NODE_TYPE(node) == FUNCTION) {
+		fprintf(file, "%s line = %zu type = %d", NODE_VAR_NAME(node), node->line_num, FUNCTION);
 	}
 
 	fprintf(file, "\n");
@@ -157,25 +161,32 @@ void SaveNameTable(NameTable* name_table, FILE* file) {
 
 	assert(name_table != nullptr);
 
-	fprintf(file, "NameTable [%zu] {\n", name_table->size);
-
 	for (int i = 0; i < name_table->size; i++) {
 		fprintf(file, "    [\"%s\", %d, %d]\n",
 					  name_table->table[i].name,
 					  name_table->table[i].code,
 					  name_table->table[i].type);
 	}
-
-	fprintf(file, "}\n\n");
 }
 
-void SaveTree(Tree* tree, FILE* file, NameTable* name_table) {
+void SaveTree(Tree* tree, FILE* file, ProgrammNameTables* table) {
 
-	assert(name_table != nullptr);
+	assert(table != nullptr);
 	assert(file != nullptr);
 	assert(tree != nullptr);
 
-	SaveNameTable(name_table, file);
+	fprintf(file, "Functions [%zu] {\n", table->funcs.size);
+
+	SaveNameTable(&(table->funcs), file);
+
+	fprintf(file, "}\n\n");
+	
+	for (size_t i = 0; i < table->size; i++) {
+		fprintf(file, "%s [%zu] {\n", table->funcs.table[i].name, table->local_tables[i].size);
+		SaveNameTable(&(table->local_tables[i]), file);
+		fprintf(file, "}\n\n");
+
+	}
 
 	fprintf(file, "Tree: {\n");
 	SaveNode(tree->root, file, 1);

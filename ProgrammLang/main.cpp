@@ -22,8 +22,8 @@ int main(int argc, const char* argv[])
     PrintTokenArray(node_array);
 
 
-    NameTable table = {};
-    NameTableCtor(&table);
+    ProgrammNameTables table = {};
+    ProgrammNameTablesCtor(&table);
 
     Node* node = GetGeneral(node_array, &table);
     Tree tree = {};

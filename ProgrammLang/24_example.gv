@@ -1,3 +1,16 @@
 digraph Tree 
 { bgcolor="cornsilk1";node[margin = "0.01"];
+"node_000001BD3EE56CC0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr line = 1 type = 3 ) }"];
+"node_000001BD3EE55D00" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 15 ( VVS line = 1 type = 3 ) }"];
+"node_000001BD3EE57040" [shape=Mrecord, style=filled, fillcolor=darkseagreen1, label = "{ FUNC | sqrt }"];
+"node_000001BD3EE56080" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr line = 1 type = 3 ) }"];
+"node_000001BD3EE56550" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless line = 1 type = 3 ) }"];
+"node_000001BD3EE57120" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 2.000000 }"];
+"node_000001BD3EE57190" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | b }"];
+node_000001BD3EE56CC0->node_000001BD3EE55D00
+node_000001BD3EE55D00->node_000001BD3EE57040
+node_000001BD3EE55D00->node_000001BD3EE56080
+node_000001BD3EE56080->node_000001BD3EE56550
+node_000001BD3EE56550->node_000001BD3EE57120
+node_000001BD3EE56550->node_000001BD3EE57190
 }

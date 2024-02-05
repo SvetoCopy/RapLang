@@ -193,6 +193,11 @@ Node* GetOperator(Node** token_array, int* token_counter, NameTable* name_table)
 
     if (while_node != nullptr) return while_node;
 
+    // Check Return
+    Node* return_node = GetReturn(token_array, token_counter, name_table);
+
+    if (return_node != nullptr) return return_node;
+
     // Check assignment
     Node* assign_node = GetAssign(token_array, token_counter, name_table);
 
@@ -312,6 +317,31 @@ Node* GetWhile(Node** token_array, int* token_counter, NameTable* name_table) {
     return token_array[*token_counter];
 }
 
+Node* GetReturn(Node** token_array, int* token_counter, NameTable* name_table) {
+
+    assert(token_array != nullptr);
+    assert(token_counter != nullptr);
+    assert(name_table != nullptr);
+
+    printf("Searching Return\n");
+
+    int old_counter = *token_counter;
+
+    if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_RETURN) {
+        printf("Return IS NOT FOUND\n");
+        return nullptr;
+    }
+
+    (*token_counter)++;
+
+    Node* return_node = GetExpression(token_array, token_counter, name_table);
+
+    token_array[old_counter]->left = return_node;
+
+    return token_array[old_counter];
+}
+
+
 Node* GetFunc(Node** token_array, int* token_counter, NameTable* name_table) {
 
     assert(token_array != nullptr);
@@ -319,22 +349,29 @@ Node* GetFunc(Node** token_array, int* token_counter, NameTable* name_table) {
 
     int old_counter = *token_counter;
 
+    if (token_array[*token_counter] == nullptr)
+        return nullptr;
+
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_FUNC_DEFINITION)
         return nullptr;
 
     (*token_counter)++;
     
-    Node* func_name = GetIdentifier(token_array, token_counter, name_table);
+    Node* func_name = GetIdentifier(token_array, token_counter);
+    func_name->data.type = FUNCTION;
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_OPEN_BRACKET_1)
         return nullptr;
 
     (*token_counter)++;
 
+    while (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
 
+        NameTableInsertVar(name_table, token_array[*token_counter]->data.value.var.name);
+        func_name->left = token_array[*token_counter];
 
-    if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1)
-        return nullptr;
+        (*token_counter)++;
+    }
 
     (*token_counter)++;
     
@@ -367,7 +404,7 @@ Node* GetAssign(Node** token_array, int* token_counter, NameTable* name_table) {
         
     (*token_counter)++;
 
-    Node* l_value = GetIdentifier(token_array, token_counter, name_table);
+    Node* l_value = GetIdentifier(token_array, token_counter);
     // ShowGraphicDump(l_value, "graph.gv");
     if (l_value == nullptr)
         return nullptr;
@@ -396,14 +433,13 @@ Node* GetAssign(Node** token_array, int* token_counter, NameTable* name_table) {
     return equal_node;
 }
 
-Node* GetIdentifier(Node** token_array, int* token_counter, NameTable* name_table) {
+Node* GetIdentifier(Node** token_array, int* token_counter) {
 
     assert(token_array != nullptr);
     assert(token_counter != nullptr);
-    assert(name_table != nullptr);
 
     if (GET_NODE_TYPE(token_array[*token_counter]) == VAR) {
-        
+
         Node* res = token_array[*token_counter];
         (*token_counter)++;
 
@@ -433,9 +469,30 @@ Node* GetPrimary(Node** token_array, int* token_counter, NameTable* name_table) 
     int old_counter = *token_counter;
     val = GetNum(token_array, token_counter, name_table);
 
-    if (old_counter == *token_counter)
-        val = GetIdentifier(token_array, token_counter, name_table);
-    
+    if (old_counter == *token_counter) {
+        val = GetIdentifier(token_array, token_counter);
+        
+        if (val != nullptr) {
+
+            if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_OPEN_BRACKET_1)
+                return val;
+
+            (*token_counter)++;
+
+            old_counter = *token_counter;
+
+            Node* arg = GetExpression(token_array, token_counter, name_table);
+
+            val->data.type = FUNCTION;
+            val->left = arg;
+
+            if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1)
+                assert(!"Skipped close bracket");
+
+            (*token_counter)++;
+        }
+    }
+
     return val;
 }
 
@@ -507,14 +564,41 @@ Node* GetNum(Node** token_array, int* token_counter, NameTable* name_table) {
     return nullptr;
 }
 
-Node* GetGeneral(Node** token_array, NameTable* name_table) {
+Node* GetGeneral(Node** token_array, ProgrammNameTables* table) {
 
+    assert(table != nullptr);
     assert(token_array != nullptr);
 
     int token_counter = 0;
-    Node* val = GetOperatorPlus(token_array, &token_counter, name_table);
 
-    ShowGraphicDump(val, "graph.gv");
-    
-    return val;
+    Node* res_oper = GetFunc(token_array, &token_counter, &(table->local_tables[0]));
+
+    NameTableInsertVar(&(table->funcs), res_oper->left->left->data.value.var.name);
+    token_counter++;
+
+    Node* res_var = res_oper;
+    Node* next_oper = {};
+    int func_counter = 1;
+
+    do {
+        next_oper = GetFunc(token_array, &token_counter, &(table->local_tables[func_counter]));
+        
+        if (next_oper != nullptr) {
+
+            NameTableInsertVar(&(table->funcs), next_oper->left->left->data.value.var.name);
+            func_counter++;
+            token_counter++;
+        }
+
+        res_var->right = next_oper;
+        res_var = res_var->right;
+
+    } while ((next_oper != nullptr) && (GET_OPERATOR_TYPE(next_oper) == OPERATOR_END1));
+
+    printf("End\n");
+
+    table->size = func_counter;
+    ShowGraphicDump(res_oper, "24_example.gv");
+
+    return res_oper;
 }

@@ -24,6 +24,17 @@ void DefineVarNode(Tree* tree, Node* node) {
 		);
 }
 
+void DefineFuncNode(Tree* tree, Node* node) {
+
+	fprintf(tree->graph_logfile,
+		"\"node_%p\" [shape=Mrecord, style=filled, fillcolor=" FUNCNODE_COLOR ", "
+		"label = \"{ %s | %s }\"];\n",
+		node,
+		"FUNC",
+		node->data.value.var.name
+	);
+}
+
 void DefineOperNode(Tree* tree, Node* node) {
 
 	fprintf(tree->graph_logfile,
@@ -43,7 +54,6 @@ int DefineNode(Tree* tree, Node* node) {
 
 	if (node == nullptr) return 0;
 
-
 	if (node->data.type == VAR)
 		DefineVarNode(tree, node);
 
@@ -52,6 +62,9 @@ int DefineNode(Tree* tree, Node* node) {
 
 	if (node->data.type == OPERATOR)
 		DefineOperNode(tree, node);
+
+	if (node->data.type == FUNCTION)
+		DefineFuncNode(tree, node);
 
 	DefineNode(tree, node->left);
 	DefineNode(tree, node->right);

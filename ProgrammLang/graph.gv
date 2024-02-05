@@ -1,44 +1,10 @@
 digraph Tree 
 { bgcolor="cornsilk1";node[margin = "0.01"];
-"node_000002E0ACC9A210" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr[1] ) }"];
-"node_000002E0ACC99BF0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 12 ( While[1] ) }"];
-"node_000002E0ACC99CD0" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 1.000000 }"];
-"node_000002E0ACC9A2F0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr[1] ) }"];
-"node_000002E0ACC98F40" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless[1] ) }"];
-"node_000002E0ACC99D40" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 2.000000 }"];
-"node_000002E0ACC9A0C0" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | a }"];
-"node_000002E0ACC99E20" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr[1] ) }"];
-"node_000002E0ACC98E60" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless[1] ) }"];
-"node_000002E0ACC99E90" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 1 ( +[1] ) }"];
-"node_000002E0ACC99790" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | a }"];
-"node_000002E0ACC99DB0" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 2.000000 }"];
-"node_000002E0ACC98920" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | c }"];
-"node_000002E0ACC99560" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr[1] ) }"];
-"node_000002E0ACC998E0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless[1] ) }"];
-"node_000002E0ACC99800" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 1 ( +[1] ) }"];
-"node_000002E0ACC99100" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 1 ( +[1] ) }"];
-"node_000002E0ACC992C0" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | a }"];
-"node_000002E0ACC99720" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 2.000000 }"];
-"node_000002E0ACC99480" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | c }"];
-"node_000002E0ACC99330" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | m }"];
-node_000002E0ACC9A210->node_000002E0ACC99BF0
-node_000002E0ACC99BF0->node_000002E0ACC99CD0
-node_000002E0ACC99BF0->node_000002E0ACC9A2F0
-node_000002E0ACC9A2F0->node_000002E0ACC98F40
-node_000002E0ACC9A2F0->node_000002E0ACC99E20
-node_000002E0ACC98F40->node_000002E0ACC99D40
-node_000002E0ACC98F40->node_000002E0ACC9A0C0
-node_000002E0ACC99E20->node_000002E0ACC98E60
-node_000002E0ACC99E20->node_000002E0ACC99560
-node_000002E0ACC98E60->node_000002E0ACC99E90
-node_000002E0ACC98E60->node_000002E0ACC98920
-node_000002E0ACC99E90->node_000002E0ACC99790
-node_000002E0ACC99E90->node_000002E0ACC99DB0
-node_000002E0ACC99560->node_000002E0ACC998E0
-node_000002E0ACC998E0->node_000002E0ACC99800
-node_000002E0ACC998E0->node_000002E0ACC99330
-node_000002E0ACC99800->node_000002E0ACC99100
-node_000002E0ACC99800->node_000002E0ACC99480
-node_000002E0ACC99100->node_000002E0ACC992C0
-node_000002E0ACC99100->node_000002E0ACC99720
+"node_000001A977B998B0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr[1] ) }"];
+"node_000001A977B996F0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless[1] ) }"];
+"node_000001A977B98810" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 6.000000 }"];
+"node_000001A977B99B50" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | a }"];
+node_000001A977B998B0->node_000001A977B996F0
+node_000001A977B996F0->node_000001A977B98810
+node_000001A977B996F0->node_000001A977B99B50
 }

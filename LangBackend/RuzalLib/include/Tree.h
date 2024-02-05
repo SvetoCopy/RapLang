@@ -37,6 +37,7 @@ enum ExprElemType {
 	COMMAND  = 1,
 	VAR		 = 2,
 	OPERATOR = 3,
+	FUNCTION = 4,
 	DELETED  = -1
 };
 
@@ -94,6 +95,7 @@ ExprElem CreateExprCommand(int cmd_code);
 ExprElem CreateExprOperator(int cmd_code);
 ExprElem CreateExprImm(double double_elem);
 ExprElem CreateExprVar(char* name);
+ExprElem CreateExprFunc(char* name);
 
 void PrintTreeExpr(Tree* tree, FILE* stream);
 bool isEqualVar(ExprVar var1, ExprVar var2);

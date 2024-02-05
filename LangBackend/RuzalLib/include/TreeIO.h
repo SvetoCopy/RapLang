@@ -38,6 +38,6 @@ enum NodeElem {
 int  ReadNodePRE(char* str, Node** res);
 void SaveTree(Tree* tree, FILE* file, NameTable* name_table);
 
-void ReadTree(FileInfo* file, NameTable* name_table, Tree* tree);
+void ReadTree(FileInfo* file, ProgrammNameTables* table, Tree* tree);
 void PrintOperator(Node* oper, FILE* file);
 #endif // !TREE_READ_HPP

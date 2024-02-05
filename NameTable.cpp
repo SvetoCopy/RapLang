@@ -41,3 +41,20 @@ void NameTableDtor(NameTable* name_table) {
 	free(name_table->table);
 	name_table->size = 0;
 }
+
+void ProgrammNameTablesCtor(ProgrammNameTables* table) {
+
+	table->local_tables = (NameTable*)calloc(INIT_TABLE_CAPACITY, sizeof(ProgrammNameTables));
+	
+	for (size_t i = 0; i < INIT_TABLE_CAPACITY; i++) {
+		NameTableCtor(&(table->local_tables[i]));
+	}
+
+	NameTableCtor(&(table->funcs));
+}
+
+void ProgrammNameTablesDtor(ProgrammNameTables* table) {
+
+	NameTableDtor(&(table->funcs));
+	free(table->local_tables);
+}

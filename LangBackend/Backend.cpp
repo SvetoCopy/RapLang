@@ -39,6 +39,13 @@ void RetranslateNodeToASM(Node* node, FILE* asm_code, NameTable name_table) {
 		return;
 	}
 
+	if (GET_NODE_TYPE(node) == FUNCTION) {
+		fprintf(asm_code, "PUSH ");
+		RetranslateVariable(node, asm_code, name_table);
+		fprintf(asm_code, "\n");
+		return;
+	}
+
 	#define DEF_OPERATOR(name, operation, code, asm_code)		\
 			if (NODE_CMD_CODE(node) == code){					\
 				asm_code;										\

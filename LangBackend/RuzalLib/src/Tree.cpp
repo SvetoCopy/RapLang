@@ -205,6 +205,23 @@ ExprElem CreateExprVar(char* name) {
 	return data;
 }
 
+ExprElem CreateExprFunc(char* name) {
+
+	assert(name != nullptr);
+
+	ExprElem data = {};
+
+	Value_t value = {};
+
+	value.var.name = _strdup(name);
+	value.var.imm_value = 0;
+
+	data.value = value;
+	ExprElemCtor(&data, FUNCTION, value);
+
+	return data;
+}
+
 Node* CreateOperatorNode(int command_code, Node* left, Node* right) {
 
 	Node* res = OpNew(CreateExprOperator(command_code));
