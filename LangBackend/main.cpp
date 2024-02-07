@@ -20,7 +20,12 @@ int main()
     FILE* file_asm = {};
     fopen_s(&file_asm, "asm_code.txt", "w");
 
-    // RetranslateTreeToASM(&tree, file_asm, name_table);
+    FILE* file_save = {};
+    fopen_s(&file_save, "tes_saving.txt", "w");
+
+    SaveTree(&tree, file_save, &name_table);
+
+    RetranslateTreeToASM(&tree, file_asm, name_table);
 
     return 0;
 }

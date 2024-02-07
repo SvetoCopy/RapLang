@@ -36,8 +36,9 @@ enum NodeElem {
 };
 
 int  ReadNodePRE(char* str, Node** res);
-void SaveTree(Tree* tree, FILE* file, NameTable* name_table);
+void SaveTree(Tree* tree, FILE* file, ProgrammNameTables* table);
+
+void PrintOperator(Node* oper, FILE* file);
 
 void ReadTree(FileInfo* file, ProgrammNameTables* table, Tree* tree);
-void PrintOperator(Node* oper, FILE* file);
 #endif // !TREE_READ_HPP

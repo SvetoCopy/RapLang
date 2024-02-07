@@ -175,14 +175,14 @@ void SaveTree(Tree* tree, FILE* file, ProgrammNameTables* table) {
 	assert(file != nullptr);
 	assert(tree != nullptr);
 
-	fprintf(file, "Functions [%zu] {\n", table->funcs.size);
+	fprintf(file, "Functions size: %zu {\n", table->funcs.size);
 
 	SaveNameTable(&(table->funcs), file);
 
 	fprintf(file, "}\n\n");
 	
 	for (size_t i = 0; i < table->size; i++) {
-		fprintf(file, "%s [%zu] {\n", table->funcs.table[i].name, table->local_tables[i].size);
+		fprintf(file, "%s size: %zu {\n", table->funcs.table[i].name, table->local_tables[i].size);
 		SaveNameTable(&(table->local_tables[i]), file);
 		fprintf(file, "}\n\n");
 

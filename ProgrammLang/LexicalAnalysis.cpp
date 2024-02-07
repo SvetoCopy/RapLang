@@ -116,12 +116,13 @@ Node** ReadTokenArray(const char* str) {
 
 	while (*str != '\0') {
 
-		if (isspace(*str) || *str == '\t') {
+		if (*str == '\n') {
+			line_iter++;
 			str++;
 		}
 
-		else if (*str == '\n') {
-			line_iter++;
+		else if (isspace(*str) || *str == '\t') {
+			str++;
 		}
 
 		else if (ReadCharToken(str, &(node_array[iter])) != 0) {

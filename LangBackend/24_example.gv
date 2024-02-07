@@ -1,16 +1,66 @@
 digraph Tree 
 { bgcolor="cornsilk1";node[margin = "0.01"];
-"node_000001D702732660" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr ) }"];
-"node_000001D702732820" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 15 ( VVS ) }"];
-"node_000001D702732A50" [shape=Mrecord, style=filled, fillcolor=darkseagreen1, label = "{ FUNC | sqrt }"];
-"node_000001D702732F90" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr ) }"];
-"node_000001D702732970" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless ) }"];
-"node_000001D7027330E0" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 2.000000 }"];
-"node_000001D702733620" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | b }"];
-node_000001D702732660->node_000001D702732820
-node_000001D702732820->node_000001D702732A50
-node_000001D702732820->node_000001D702732F90
-node_000001D702732F90->node_000001D702732970
-node_000001D702732970->node_000001D7027330E0
-node_000001D702732970->node_000001D702733620
+"node_0000021066D34530" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr line = 1 type = 3 ) }"];
+"node_0000021066D35250" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 15 ( VVS line = 1 type = 3 ) }"];
+"node_0000021066D33DC0" [shape=Mrecord, style=filled, fillcolor=darkseagreen1, label = "{ FUNC | square }"];
+"node_0000021066D33B20" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 17 ( $ line = 1 type = 3 ) }"];
+"node_0000021066D344C0" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | n }"];
+"node_0000021066D351E0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 17 ( $ line = 1 type = 3 ) }"];
+"node_0000021066D34BC0" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | d }"];
+"node_0000021066D34920" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 17 ( $ line = 0 type = 3 ) }"];
+"node_0000021066D34140" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | c }"];
+"node_0000021066D34D80" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 16 ( FuckTwelve line = 1 type = 3 ) }"];
+"node_0000021066D34450" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 0 ( * line = 1 type = 3 ) }"];
+"node_0000021066D34B50" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | n }"];
+"node_0000021066D33B90" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | n }"];
+"node_0000021066D354F0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr line = 1 type = 3 ) }"];
+"node_0000021066D34DF0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 15 ( VVS line = 1 type = 3 ) }"];
+"node_0000021066D35480" [shape=Mrecord, style=filled, fillcolor=darkseagreen1, label = "{ FUNC | main }"];
+"node_0000021066D34FB0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 7 ( grr line = 1 type = 3 ) }"];
+"node_0000021066D33F80" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 9 ( Bless line = 1 type = 3 ) }"];
+"node_0000021066D345A0" [shape=Mrecord, style=filled, fillcolor=darkseagreen1, label = "{ FUNC | square }"];
+"node_0000021066D35410" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 17 ( $ line = 1 type = 3 ) }"];
+"node_0000021066D353A0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 1 ( + line = 1 type = 3 ) }"];
+"node_0000021066D34C30" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 3.000000 }"];
+"node_0000021066D34E60" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 4.000000 }"];
+"node_0000021066D33FF0" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 17 ( $ line = 1 type = 3 ) }"];
+"node_0000021066D35560" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 7.000000 }"];
+"node_0000021066D34220" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 17 ( $ line = 0 type = 3 ) }"];
+"node_0000021066D35090" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 1 ( + line = 1 type = 3 ) }"];
+"node_0000021066D34610" [shape=Mrecord, style=filled, fillcolor=darkolivegreen1, label = "{ OPER | 0 ( * line = 1 type = 3 ) }"];
+"node_0000021066D339D0" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 2.000000 }"];
+"node_0000021066D34ED0" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 7.000000 }"];
+"node_0000021066D34680" [shape=Mrecord, style=filled, fillcolor=darksalmon, label = "{ IMM | 5.000000 }"];
+"node_0000021066D33C00" [shape=Mrecord, style=filled, fillcolor=bisque, label = "{ VAR | c }"];
+node_0000021066D34530->node_0000021066D35250
+node_0000021066D34530->node_0000021066D354F0
+node_0000021066D35250->node_0000021066D33DC0
+node_0000021066D35250->node_0000021066D34D80
+node_0000021066D33DC0->node_0000021066D33B20
+node_0000021066D33B20->node_0000021066D344C0
+node_0000021066D33B20->node_0000021066D351E0
+node_0000021066D351E0->node_0000021066D34BC0
+node_0000021066D351E0->node_0000021066D34920
+node_0000021066D34920->node_0000021066D34140
+node_0000021066D34D80->node_0000021066D34450
+node_0000021066D34450->node_0000021066D34B50
+node_0000021066D34450->node_0000021066D33B90
+node_0000021066D354F0->node_0000021066D34DF0
+node_0000021066D34DF0->node_0000021066D35480
+node_0000021066D34DF0->node_0000021066D34FB0
+node_0000021066D34FB0->node_0000021066D33F80
+node_0000021066D33F80->node_0000021066D345A0
+node_0000021066D33F80->node_0000021066D33C00
+node_0000021066D345A0->node_0000021066D35410
+node_0000021066D35410->node_0000021066D353A0
+node_0000021066D35410->node_0000021066D33FF0
+node_0000021066D353A0->node_0000021066D34C30
+node_0000021066D353A0->node_0000021066D34E60
+node_0000021066D33FF0->node_0000021066D35560
+node_0000021066D33FF0->node_0000021066D34220
+node_0000021066D34220->node_0000021066D35090
+node_0000021066D35090->node_0000021066D34610
+node_0000021066D35090->node_0000021066D34680
+node_0000021066D34610->node_0000021066D339D0
+node_0000021066D34610->node_0000021066D34ED0
 }

@@ -133,72 +133,7 @@ int ReadNodePRE(char* str, Node** res) {
 	return res_size;
 }
 
-void PrintOperator(Node* oper, FILE* file) {
-
-	assert(file != nullptr);
-
-	switch (NODE_CMD_CODE(oper)) {
-		#define DEF_OPERATOR(name, command, code, ...) \
-		case code:									   \
-			fprintf(file, command);					   \
-			break;
-		#include "../../def_operator.h"
-		#undef DEF_OPERATOR
-	}
-}
-
-void SaveNode(Node* node, FILE* file, int rec_level) {
-	
-	assert(file != nullptr);
-
-	fprintf(file, "%*s", rec_level * INDENT_SIZE, "");
-
-	if (node == nullptr) {
-		fprintf(file, " %s\n", DEFAULT_NIL);
-		
-		return;
-	}
-	
-	fprintf(file, "(");
-
-	if (GET_NODE_TYPE(node) == VAR) {
-		fprintf(file, "%s", NODE_VAR_NAME(node));
-	}
-
-	else if (GET_NODE_TYPE(node) == OPERATOR) {
-		PrintOperator(node, file);
-	}
-
-	else if (GET_NODE_TYPE(node) == NUM) {
-		fprintf(file, "%d", NODE_IMM_VALUE(node));
-	}
-
-	fprintf(file, "\n");
-
-	SaveNode(node->left, file, rec_level + 1);
-	SaveNode(node->right, file, rec_level + 1);
-
-	fprintf(file, "%*s", rec_level * INDENT_SIZE, "");
-	fprintf(file, ")\n");
-}
-
-void SaveNameTable(NameTable* name_table, FILE* file) {
-
-	assert(name_table != nullptr);
-
-	fprintf(file, "NameTable [%d] {\n", name_table->size);
-
-	for (int i = 0; i < name_table->size; i++) {
-		fprintf(file, "    [\"%s\", %d, %d]\n",
-					  name_table->table[i].name,
-					  name_table->table[i].code,
-					  name_table->table[i].type);
-	}
-
-	fprintf(file, "}\n\n");
-}
-
-int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size) {
+int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size, int start_address) {
 	
 	assert(str != nullptr);
 	
@@ -210,7 +145,7 @@ int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size
 
 		char			  name[MAX_NAME_SIZE] = "";
 		int				  code				  = 0;
-		NameTableElemType type				  = KEYWORD;
+		NameTableElemType type				  = ARGUMENT;
 
 		int read_size = 0;
 		sscanf(str + name_table_iter, " [\"%[^\"]\", %d, %d%n", &name, &code, &type, &read_size);
@@ -218,8 +153,9 @@ int ReadNameTable(const char* str, NameTable* name_table, size_t name_table_size
 		name_table->table[i].name    = _strdup(name);
 		name_table->table[i].code    = code;
 		name_table->table[i].type    = type;
-		name_table->table[i].address = code;
+		name_table->table[i].address = start_address + code;
 
+		name_table->size += 1;
 		name_table_iter += read_size + 1;
 	}
 
@@ -239,22 +175,28 @@ void ReadTree(FileInfo* file, ProgrammNameTables* table, Tree* tree) {
 	int	   read_size					  = 0;
 	size_t func_table_size				  = 0;
 
-	sscanf(file->buff, "Functions [%zu] {%[^}]}%n", &func_table_size, func_table_str, &read_size);
+	sscanf(file->buff, "Functions size: %zu { %[^}] }%n", &func_table_size, func_table_str, &read_size);
 
-	ReadNameTable(func_table_str, &(table->funcs), func_table_size);
+	ReadNameTable(func_table_str, &(table->funcs), func_table_size, 0);
 	file->buff += read_size;
 	
+	int start_address = 0;
+
 	for (int i = 0; i < func_table_size; i++) {
 
 		char   local_table_name[MAX_NAMETABLE_SIZE] = "";
-		char   local_table_str[MAX_NAMETABLE_SIZE]  = "";
+		char   local_table_str [MAX_NAMETABLE_SIZE] = "";
 		size_t local_table_size					    = 0;
 
 		read_size = 0;
 
-		sscanf(file->buff, "%s [%zu]{%[^}]}%n", local_table_name, &local_table_size, local_table_str, &read_size);
+		sscanf(file->buff, "%s size: %zu { %[^}] }%n", local_table_name, &local_table_size, local_table_str, &read_size);
 
-		ReadNameTable(func_table_str, &(table->local_tables[i]), local_table_size);
+		ReadNameTable(local_table_str, &(table->local_tables[i]), local_table_size, start_address);
+
+		table->size++;
+		start_address += local_table_size;
+
 		file->buff += read_size;
 	}
 
@@ -268,13 +210,89 @@ void ReadTree(FileInfo* file, ProgrammNameTables* table, Tree* tree) {
 	ReadNodePRE(tree_str, &(tree->root));
 }
 
-void SaveTree(Tree* tree, FILE* file, NameTable* name_table) {
+void PrintOperator(Node* oper, FILE* file) {
+
+	assert(file != nullptr);
+
+	switch (NODE_CMD_CODE(oper)) {
+#define DEF_OPERATOR(name, command, code, ...)									\
+		case code:																		\
+			fprintf(file, command " line = %zu type = %d", oper->line_num, OPERATOR);	\
+			break;
+#include "../../def_operator.h"
+#undef DEF_OPERATOR
+	}
+}
+
+void SaveNode(Node* node, FILE* file, int rec_level) {
+
+	assert(file != nullptr);
+
+	fprintf(file, "%*s", rec_level * INDENT_SIZE, "");
+
+	if (node == nullptr) {
+		fprintf(file, " %s\n", DEFAULT_NIL);
+
+		return;
+	}
+
+	fprintf(file, "(");
+
+	if (GET_NODE_TYPE(node) == VAR) {
+		fprintf(file, "%s line = %zu type = %d", NODE_VAR_NAME(node), node->line_num, VAR);
+	}
+
+	else if (GET_NODE_TYPE(node) == OPERATOR) {
+		PrintOperator(node, file);
+	}
+
+	else if (GET_NODE_TYPE(node) == NUM) {
+		fprintf(file, "%lf line = %zu type = %d", NODE_IMM_VALUE(node), node->line_num, NUM);
+	}
+
+	else if (GET_NODE_TYPE(node) == FUNCTION) {
+		fprintf(file, "%s line = %zu type = %d", NODE_VAR_NAME(node), node->line_num, FUNCTION);
+	}
+
+	fprintf(file, "\n");
+
+	SaveNode(node->left, file, rec_level + 1);
+	SaveNode(node->right, file, rec_level + 1);
+
+	fprintf(file, "%*s", rec_level * INDENT_SIZE, "");
+	fprintf(file, ")\n");
+}
+
+void SaveNameTable(NameTable* name_table, FILE* file) {
 
 	assert(name_table != nullptr);
+
+	for (int i = 0; i < name_table->size; i++) {
+		fprintf(file, "    [\"%s\", %d, %d]\n",
+			name_table->table[i].name,
+			name_table->table[i].code,
+			name_table->table[i].type);
+	}
+}
+
+void SaveTree(Tree* tree, FILE* file, ProgrammNameTables* table) {
+
+	assert(table != nullptr);
 	assert(file != nullptr);
 	assert(tree != nullptr);
 
-	SaveNameTable(name_table, file);
+	fprintf(file, "Functions [%zu] {\n", table->funcs.size);
+
+	SaveNameTable(&(table->funcs), file);
+
+	fprintf(file, "}\n\n");
+
+	for (size_t i = 0; i < table->size; i++) {
+		fprintf(file, "%s [%zu] {\n", table->funcs.table[i].name, table->local_tables[i].size);
+		SaveNameTable(&(table->local_tables[i]), file);
+		fprintf(file, "}\n\n");
+
+	}
 
 	fprintf(file, "Tree: {\n");
 	SaveNode(tree->root, file, 1);

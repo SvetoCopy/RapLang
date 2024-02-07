@@ -6,7 +6,7 @@
 const int INIT_TABLE_CAPACITY = 100;
 
 enum NameTableElemType {
-	KEYWORD  = 0,
+	ARGUMENT = 0,
 	VARIABLE = 1,
 };
 
@@ -34,5 +34,5 @@ void NameTableDtor(NameTable* name_table);
 void ProgrammNameTablesCtor(ProgrammNameTables* table);
 void ProgrammNameTablesDtor(ProgrammNameTables* table);
 
-void NameTableInsertVar(NameTable* name_table, const char* name);
+void NameTableInsert(NameTable* name_table, const char* name, NameTableElemType type);
 #endif // !

@@ -1,20 +1,6 @@
 #include "NameTable.h"
 
-void NameTableInsertKeyWord(NameTable* name_table, const char* name, int code) {
-
-	assert(name != nullptr);
-	assert(name_table != nullptr);
-
-	NameTableElem elem = {};
-	elem.code = code;
-	elem.name = name;
-	elem.type = KEYWORD;
-
-	name_table->table[name_table->size] = elem;
-	name_table->size++;
-}
-
-void NameTableInsertVar(NameTable* name_table, const char* name) {
+void NameTableInsert(NameTable* name_table, const char* name, NameTableElemType type) {
 
 	assert(name != nullptr);
 	assert(name_table != nullptr);
@@ -22,7 +8,7 @@ void NameTableInsertVar(NameTable* name_table, const char* name) {
 	NameTableElem elem = {};
 	elem.code = name_table->size;
 	elem.name = name;
-	elem.type = VARIABLE;
+	elem.type = type;
 
 	name_table->table[name_table->size] = elem;
 
