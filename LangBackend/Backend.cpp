@@ -46,10 +46,10 @@ void GiveArgs(Node* func, FILE* asm_code, ProgrammNameTables table, NameTable na
 			int   iter = 0;
 			Node* arg  = func->left;
 
-			while (table.local_tables[i].table[iter].type == ARGUMENT) {
+			while (table.local_tables[i].table[iter].type == ARGUMENT && iter < table.local_tables[i].size) {
 				
 				if (arg == nullptr)
-					assert("Fuck, give me enough arguments, nigga");
+					assert(!"Fuck, give me enough arguments, nigga");
 
 				GiveArg(asm_code, arg, table.local_tables[i].table[iter], name_table, table);
 				arg = arg->right;

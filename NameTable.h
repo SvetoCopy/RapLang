@@ -3,7 +3,7 @@
 #include "assert.h"
 #include <stdlib.h>
 
-const int INIT_TABLE_CAPACITY = 100;
+const int INIT_TABLE_CAPACITY = 1000;
 
 enum NameTableElemType {
 	ARGUMENT = 0,

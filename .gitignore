@@ -12,3 +12,10 @@ ProgrammLang/ProgrammLang.sln
 ProgrammLang/ProgrammLang.vcxproj
 ProgrammLang/ProgrammLang.vcxproj.filters
 ProgrammLang/ProgrammLang.vcxproj.user
+
+ReverseFrontend/.vs/
+ReverseFrontend/x64/
+ReverseFrontend/ReverseFrontend.sln
+ReverseFrontend/ReverseFrontend.vcxproj
+ReverseFrontend/ReverseFrontend.vcxproj.filters
+ReverseFrontend/ReverseFrontend.vcxproj.user

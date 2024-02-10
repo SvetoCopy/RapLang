@@ -1,35 +1,27 @@
-VVS GetSym pisyat x $ y dva Love
-	Bless height To 25 grr
-	Bless width To 25 grr
-	Bless center_x To width / 2 + 1 grr
-	Bless center_y To height / 2 + 1 grr
-	Bless radius To height - center_y grr
-	LegitCheck pisyat pisyat pisyat x + 1 - center_x dva  ^ 2  +  pisyat y + 1 - center_x dva  ^ 2 dva < pisyat radius ^ 2 dva dva Love
-		FuckTwelve 42 grr
-	Sosa grr
-
-	FuckTwelve 32 grr
-Sosa grr
-
-VVS main pisyat dva Love
-	
-	Bless height To 25 grr
-	Bless width To 25 grr
-
-	Bless y To 0 grr
-
-	Sesh pisyat y < height dva Love
-		Bless x To 0 grr
-		Sesh pisyat x < width dva Love
-			
-			PawPaw GetSym pisyat x $ y dva grr
-			
-			Bless x To x + 1 grr
-		Sosa grr
-		Bless y To y + 1 grr
-		PawPaw 10 grr
-	Sosa grr
-	
-	
-	FuckTwelve 0 grr
-Sosa grr
+VVS SolveLinear pisyat b $ c dva  Love
+FuckTwelve  pisyat  pisyat 0-c dva /b dva  grr
+ Sosa  grr
+VVS Discr pisyat a $ b $ c dva  Love
+FuckTwelve  pisyat  pisyat b*b dva - pisyat  pisyat 0*a dva *c dva  dva  grr
+ Sosa  grr
+VVS GetFirstRoot pisyat a $ b $ D dva  Love
+FuckTwelve  pisyat  pisyat  pisyat 0-b dva + pisyat D^ pisyat 0/0 dva  dva  dva / pisyat 0*a dva  dva  grr
+ Sosa  grr
+VVS GetSecondRoot pisyat a $ b $ D dva  Love
+FuckTwelve  pisyat  pisyat  pisyat 0-b dva - pisyat D^ pisyat 0/0 dva  dva  dva / pisyat 0*a dva  dva  grr
+ Sosa  grr
+VVS main pisyat  dva  Love
+Bless a To 0 grr
+Bless b To 0 grr
+Bless c To 0 grr
+PullUp a grr
+PullUp b grr
+PullUp c grr
+LegitCheck pisyat  is  dva Love
+ShoutOut SolveLinear pisyat b $ c dva  grr
+FuckTwelve 0 grr
+ Sosa  grr
+ShoutOut GetFirstRoot pisyat a $ b $ Discr pisyat a $ b $ c dva  dva  grr
+ShoutOut GetSecondRoot pisyat a $ b $ Discr pisyat a $ b $ c dva  dva  grr
+FuckTwelve 0 grr
+ Sosa  grr
