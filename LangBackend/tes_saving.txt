@@ -1,111 +1,378 @@
 Functions [2] {
-    ["square", 0, 1]
+    ["GetSym", 0, 1]
     ["main", 1, 1]
 }
 
-square [3] {
-    ["n", 0, 0]
-    ["d", 1, 0]
-    ["c", 2, 0]
+GetSym [7] {
+    ["x", 0, 0]
+    ["y", 1, 0]
+    ["height", 2, 1]
+    ["width", 3, 1]
+    ["center_x", 4, 1]
+    ["center_y", 5, 1]
+    ["radius", 6, 1]
 }
 
-main [1] {
-    ["c", 0, 1]
+main [6] {
+    ["height", 0, 1]
+    ["width", 1, 1]
+    ["y", 2, 1]
+    ["x", 3, 1]
+    ["x", 4, 1]
+    ["y", 5, 1]
 }
 
 Tree: {
-  (grr line = 1 type = 3
+  (grr line = 12 type = 3
     (VVS line = 1 type = 3
-      (square line = 1 type = 4
+      (GetSym line = 1 type = 4
         ($ line = 1 type = 3
-          (n line = 1 type = 2
+          (x line = 1 type = 2
              .
              .
           )
-          ($ line = 1 type = 3
-            (d line = 1 type = 2
+          ($ line = 0 type = 3
+            (y line = 1 type = 2
                .
                .
             )
-            ($ line = 0 type = 3
-              (c line = 1 type = 2
-                 .
-                 .
-              )
-               .
-            )
-          )
-        )
-         .
-      )
-      (FuckTwelve line = 1 type = 3
-        (* line = 1 type = 3
-          (n line = 1 type = 2
-             .
-             .
-          )
-          (n line = 1 type = 2
-             .
              .
           )
         )
          .
       )
-    )
-    (grr line = 1 type = 3
-      (VVS line = 1 type = 3
-        (main line = 1 type = 4
-           .
-           .
+      (grr line = 2 type = 3
+        (Bless line = 2 type = 3
+          (25.000000 line = 2 type = 0
+             .
+             .
+          )
+          (height line = 2 type = 2
+             .
+             .
+          )
         )
-        (grr line = 1 type = 3
-          (Bless line = 1 type = 3
-            (square line = 1 type = 4
-              ($ line = 1 type = 3
-                (+ line = 1 type = 3
-                  (3.000000 line = 1 type = 0
+        (grr line = 3 type = 3
+          (Bless line = 3 type = 3
+            (25.000000 line = 3 type = 0
+               .
+               .
+            )
+            (width line = 3 type = 2
+               .
+               .
+            )
+          )
+          (grr line = 4 type = 3
+            (Bless line = 4 type = 3
+              (+ line = 4 type = 3
+                (/ line = 4 type = 3
+                  (width line = 4 type = 2
                      .
                      .
                   )
-                  (4.000000 line = 1 type = 0
+                  (2.000000 line = 4 type = 0
                      .
                      .
                   )
                 )
-                ($ line = 1 type = 3
-                  (7.000000 line = 1 type = 0
+                (1.000000 line = 4 type = 0
+                   .
+                   .
+                )
+              )
+              (center_x line = 4 type = 2
+                 .
+                 .
+              )
+            )
+            (grr line = 5 type = 3
+              (Bless line = 5 type = 3
+                (+ line = 5 type = 3
+                  (/ line = 5 type = 3
+                    (height line = 5 type = 2
+                       .
+                       .
+                    )
+                    (2.000000 line = 5 type = 0
+                       .
+                       .
+                    )
+                  )
+                  (1.000000 line = 5 type = 0
                      .
                      .
                   )
-                  ($ line = 0 type = 3
-                    (+ line = 1 type = 3
-                      (* line = 1 type = 3
-                        (2.000000 line = 1 type = 0
+                )
+                (center_y line = 5 type = 2
+                   .
+                   .
+                )
+              )
+              (grr line = 6 type = 3
+                (Bless line = 6 type = 3
+                  (- line = 6 type = 3
+                    (height line = 6 type = 2
+                       .
+                       .
+                    )
+                    (center_y line = 6 type = 2
+                       .
+                       .
+                    )
+                  )
+                  (radius line = 6 type = 2
+                     .
+                     .
+                  )
+                )
+                (grr line = 9 type = 3
+                  (LegitCheck line = 7 type = 3
+                    (< line = 7 type = 3
+                      (+ line = 7 type = 3
+                        (^ line = 7 type = 3
+                          (- line = 7 type = 3
+                            (+ line = 7 type = 3
+                              (x line = 7 type = 2
+                                 .
+                                 .
+                              )
+                              (1.000000 line = 7 type = 0
+                                 .
+                                 .
+                              )
+                            )
+                            (center_x line = 7 type = 2
+                               .
+                               .
+                            )
+                          )
+                          (2.000000 line = 7 type = 0
+                             .
+                             .
+                          )
+                        )
+                        (^ line = 7 type = 3
+                          (- line = 7 type = 3
+                            (+ line = 7 type = 3
+                              (y line = 7 type = 2
+                                 .
+                                 .
+                              )
+                              (1.000000 line = 7 type = 0
+                                 .
+                                 .
+                              )
+                            )
+                            (center_x line = 7 type = 2
+                               .
+                               .
+                            )
+                          )
+                          (2.000000 line = 7 type = 0
+                             .
+                             .
+                          )
+                        )
+                      )
+                      (^ line = 7 type = 3
+                        (radius line = 7 type = 2
                            .
                            .
                         )
-                        (7.000000 line = 1 type = 0
+                        (2.000000 line = 7 type = 0
                            .
                            .
                         )
                       )
-                      (5.000000 line = 1 type = 0
+                    )
+                    (grr line = 8 type = 3
+                      (FuckTwelve line = 8 type = 3
+                        (42.000000 line = 8 type = 0
+                           .
+                           .
+                        )
+                         .
+                      )
+                       .
+                    )
+                  )
+                  (grr line = 11 type = 3
+                    (FuckTwelve line = 11 type = 3
+                      (32.000000 line = 11 type = 0
                          .
                          .
                       )
+                       .
                     )
                      .
                   )
                 )
               )
+            )
+          )
+        )
+      )
+    )
+    (grr line = 35 type = 3
+      (VVS line = 14 type = 3
+        (main line = 14 type = 4
+           .
+           .
+        )
+        (grr line = 16 type = 3
+          (Bless line = 16 type = 3
+            (25.000000 line = 16 type = 0
+               .
                .
             )
-            (c line = 1 type = 2
+            (height line = 16 type = 2
                .
                .
             )
           )
-           .
+          (grr line = 17 type = 3
+            (Bless line = 17 type = 3
+              (25.000000 line = 17 type = 0
+                 .
+                 .
+              )
+              (width line = 17 type = 2
+                 .
+                 .
+              )
+            )
+            (grr line = 19 type = 3
+              (Bless line = 19 type = 3
+                (0.000000 line = 19 type = 0
+                   .
+                   .
+                )
+                (y line = 19 type = 2
+                   .
+                   .
+                )
+              )
+              (grr line = 31 type = 3
+                (Sesh line = 21 type = 3
+                  (< line = 21 type = 3
+                    (y line = 21 type = 2
+                       .
+                       .
+                    )
+                    (height line = 21 type = 2
+                       .
+                       .
+                    )
+                  )
+                  (grr line = 22 type = 3
+                    (Bless line = 22 type = 3
+                      (0.000000 line = 22 type = 0
+                         .
+                         .
+                      )
+                      (x line = 22 type = 2
+                         .
+                         .
+                      )
+                    )
+                    (grr line = 28 type = 3
+                      (Sesh line = 23 type = 3
+                        (< line = 23 type = 3
+                          (x line = 23 type = 2
+                             .
+                             .
+                          )
+                          (width line = 23 type = 2
+                             .
+                             .
+                          )
+                        )
+                        (grr line = 25 type = 3
+                          (PawPaw line = 25 type = 3
+                            (GetSym line = 25 type = 4
+                              ($ line = 25 type = 3
+                                (x line = 25 type = 2
+                                   .
+                                   .
+                                )
+                                ($ line = 0 type = 3
+                                  (y line = 25 type = 2
+                                     .
+                                     .
+                                  )
+                                   .
+                                )
+                              )
+                               .
+                            )
+                             .
+                          )
+                          (grr line = 27 type = 3
+                            (Bless line = 27 type = 3
+                              (+ line = 27 type = 3
+                                (x line = 27 type = 2
+                                   .
+                                   .
+                                )
+                                (1.000000 line = 27 type = 0
+                                   .
+                                   .
+                                )
+                              )
+                              (x line = 27 type = 2
+                                 .
+                                 .
+                              )
+                            )
+                             .
+                          )
+                        )
+                      )
+                      (grr line = 29 type = 3
+                        (Bless line = 29 type = 3
+                          (+ line = 29 type = 3
+                            (y line = 29 type = 2
+                               .
+                               .
+                            )
+                            (1.000000 line = 29 type = 0
+                               .
+                               .
+                            )
+                          )
+                          (y line = 29 type = 2
+                             .
+                             .
+                          )
+                        )
+                        (grr line = 30 type = 3
+                          (PawPaw line = 30 type = 3
+                            (10.000000 line = 30 type = 0
+                               .
+                               .
+                            )
+                             .
+                          )
+                           .
+                        )
+                      )
+                    )
+                  )
+                )
+                (grr line = 34 type = 3
+                  (FuckTwelve line = 34 type = 3
+                    (0.000000 line = 34 type = 0
+                       .
+                       .
+                    )
+                     .
+                  )
+                   .
+                )
+              )
+            )
+          )
         )
       )
        .

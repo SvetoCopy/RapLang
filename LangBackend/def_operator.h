@@ -82,7 +82,7 @@ DEF_OPERATOR(IF, "LegitCheck", 11,
 
 )
 
-DEF_OPERATOR(WHILE, "While", 12, 
+DEF_OPERATOR(WHILE, "Sesh", 12, 
 	
 	int cond_id = GetNextOperId();
 	fprintf(asm_code, "while_condition_%d:\n", cond_id);
@@ -123,8 +123,8 @@ DEF_OPERATOR(ARG_SEP, "$", 17, )
 
 DEF_OPERATOR(EQUAL, "is", 18,
 	
-	RetranslateNodeToASM(node->left, asm_code, name_table, table);
 	RetranslateNodeToASM(node->right, asm_code, name_table, table);
+RetranslateNodeToASM(node->left, asm_code, name_table, table);
 
 	int cond_id = GetNextOperId();
 	int end_cond_id = GetNextOperId();
@@ -139,8 +139,8 @@ DEF_OPERATOR(EQUAL, "is", 18,
 )
 DEF_OPERATOR(MORE, ">", 19,
 	
-	RetranslateNodeToASM(node->left, asm_code, name_table, table);
 	RetranslateNodeToASM(node->right, asm_code, name_table, table);
+	RetranslateNodeToASM(node->left, asm_code, name_table, table);
 
 	int cond_id = GetNextOperId();
 	int end_cond_id = GetNextOperId();
@@ -155,8 +155,8 @@ DEF_OPERATOR(MORE, ">", 19,
 )
 DEF_OPERATOR(LESS, "<", 20, 
 	
-	RetranslateNodeToASM(node->left, asm_code, name_table, table);
 	RetranslateNodeToASM(node->right, asm_code, name_table, table);
+	RetranslateNodeToASM(node->left, asm_code, name_table, table);
 
 	int cond_id = GetNextOperId();
 	int end_cond_id = GetNextOperId();
@@ -219,4 +219,25 @@ DEF_OPERATOR(PRINT, "ShoutOut", 23,
 	RetranslateNodeToASM(node->left, asm_code, name_table, table);
 	fprintf(asm_code, "OUT\n");
 	
+)
+
+DEF_OPERATOR(INPUT_NUM, "PullUp", 24,
+	
+	if (GET_NODE_TYPE(node->left) != VAR) {
+		printf("Where should I pull up???? line: %d\n", node->line_num);
+		assert(0);
+	}
+	
+	fprintf(asm_code, "IN\n");
+	fprintf(asm_code, "POP ");
+	RetranslateVariable(node->left, asm_code, name_table);
+	fprintf(asm_code, "\n");
+
+)
+
+DEF_OPERATOR(VRAM_PRINT, "PawPaw", 25, 
+	
+	RetranslateNodeToASM(node->left, asm_code, name_table, table);
+	fprintf(asm_code, "PRINT\n");
+
 )

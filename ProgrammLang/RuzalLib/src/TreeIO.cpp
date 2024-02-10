@@ -118,6 +118,20 @@ void PrintOperator(Node* oper, FILE* file) {
 	}
 }
 
+void PrintOperatorWithQuotes(Node* oper, FILE* file) {
+
+	assert(file != nullptr);
+
+	switch (NODE_CMD_CODE(oper)) {
+		#define DEF_OPERATOR(name, command, code, ...)									\
+		case code:																		\
+			fprintf(file, "\"" command "\"" " line = %zu type = %d", oper->line_num, OPERATOR);	\
+			break;
+		#include "../../def_operator.h"
+		#undef DEF_OPERATOR
+	}
+}
+
 void SaveNode(Node* node, FILE* file, int rec_level) {
 	
 	assert(file != nullptr);

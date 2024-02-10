@@ -1,0 +1,151 @@
+CALL main
+HLT
+GetSym:
+
+; the next operator has gone from 2 line
+PUSH 25.000000
+POP [2]
+
+; the next operator has gone from 3 line
+PUSH 25.000000
+POP [3]
+
+; the next operator has gone from 4 line
+PUSH [3]
+PUSH 2.000000
+DIV
+PUSH 1.000000
+ADD
+POP [4]
+
+; the next operator has gone from 5 line
+PUSH [2]
+PUSH 2.000000
+DIV
+PUSH 1.000000
+ADD
+POP [5]
+
+; the next operator has gone from 6 line
+PUSH [2]
+PUSH [5]
+SUB
+POP [6]
+
+; the next operator has gone from 7 line
+PUSH [6]
+PUSH 2.000000
+POW
+PUSH [0]
+PUSH 1.000000
+ADD
+PUSH [4]
+SUB
+PUSH 2.000000
+POW
+PUSH [1]
+PUSH 1.000000
+ADD
+PUSH [4]
+SUB
+PUSH 2.000000
+POW
+ADD
+JB cond_1
+PUSH 0
+JMP end_cond2
+cond_1:
+PUSH 1
+end_cond2:
+PUSH 0
+JE end_if_3
+
+; the next operator has gone from 8 line
+PUSH 42.000000
+POP RAX
+RET
+end_if_3:
+
+; the next operator has gone from 11 line
+PUSH 32.000000
+POP RAX
+RET
+main:
+
+; the next operator has gone from 16 line
+PUSH 25.000000
+POP [7]
+
+; the next operator has gone from 17 line
+PUSH 25.000000
+POP [8]
+
+; the next operator has gone from 19 line
+PUSH 0.000000
+POP [9]
+
+; the next operator has gone from 21 line
+while_condition_4:
+PUSH [7]
+PUSH [9]
+JB cond_5
+PUSH 0
+JMP end_cond6
+cond_5:
+PUSH 1
+end_cond6:
+PUSH 0
+JE end_while_7
+
+; the next operator has gone from 22 line
+PUSH 0.000000
+POP [10]
+
+; the next operator has gone from 23 line
+while_condition_8:
+PUSH [8]
+PUSH [10]
+JB cond_9
+PUSH 0
+JMP end_cond10
+cond_9:
+PUSH 1
+end_cond10:
+PUSH 0
+JE end_while_11
+
+; the next operator has gone from 25 line
+PUSH [10]
+
+POP [0]
+PUSH [9]
+
+POP [1]
+CALL GetSym
+PUSH RAX
+PRINT
+
+; the next operator has gone from 27 line
+PUSH [10]
+PUSH 1.000000
+ADD
+POP [10]
+JMP while_condition_8
+end_while_11:
+
+; the next operator has gone from 29 line
+PUSH [9]
+PUSH 1.000000
+ADD
+POP [9]
+
+; the next operator has gone from 30 line
+PUSH 10.000000
+PRINT
+JMP while_condition_4
+end_while_7:
+
+; the next operator has gone from 34 line
+PUSH 0.000000
+POP RAX
+RET

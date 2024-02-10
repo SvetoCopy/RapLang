@@ -46,13 +46,10 @@ void GiveArgs(Node* func, FILE* asm_code, ProgrammNameTables table, NameTable na
 			int   iter = 0;
 			Node* arg  = func->left;
 
-			while (iter < table.local_tables[i].size) {
+			while (table.local_tables[i].table[iter].type == ARGUMENT) {
 				
 				if (arg == nullptr)
 					assert("Fuck, give me enough arguments, nigga");
-
-				if (table.local_tables[i].table[iter].type == ARGUMENT)
-					assert("Fuck, too many arguments, nigga");
 
 				GiveArg(asm_code, arg, table.local_tables[i].table[iter], name_table, table);
 				arg = arg->right;
@@ -125,10 +122,13 @@ void RetranslateTreeToASM(Tree* tree, FILE* asm_code, ProgrammNameTables table) 
 	assert(tree != nullptr);
 	assert(asm_code != nullptr);
 
+	fprintf(asm_code, "CALL main\n");
+	fprintf(asm_code, "HLT\n");
+
 	Node* var_node = tree->root;
 
 	for (int i = 0; i < table.size; i++) {
-		RetranslateNodeToASM(var_node->left, stdout, table.local_tables[i], table);
+		RetranslateNodeToASM(var_node->left, asm_code, table.local_tables[i], table);
 		var_node = var_node->right;
 	}
 	

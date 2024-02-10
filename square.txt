@@ -1,0 +1,36 @@
+VVS SolveLinear pisyat b $ c dva Love
+	FuckTwelve pisyat 0 - c dva / b  grr
+Sosa grr
+
+VVS Discr pisyat a $ b $ c dva Love
+	FuckTwelve b * b - 4 * a * c  grr
+Sosa grr
+
+VVS GetFirstRoot pisyat a $ b $ D dva Love
+	FuckTwelve pisyat pisyat 0 - b dva + D ^ pisyat 1 / 2 dva dva / pisyat 2 * a dva grr
+Sosa grr
+
+VVS GetSecondRoot pisyat a $ b $ D dva Love
+	FuckTwelve pisyat pisyat 0 - b dva - D ^ pisyat 1 / 2 dva dva / pisyat 2 * a dva  grr
+Sosa grr
+
+VVS main pisyat dva Love
+
+	Bless a To 0 grr
+	Bless b To 0 grr
+	Bless c To 0 grr
+	
+	PullUp a grr	
+	PullUp b grr	
+	PullUp c grr
+
+	LegitCheck pisyat  a is 0 dva Love
+		ShoutOut SolveLinear pisyat b $ c dva grr
+		FuckTwelve 0 grr
+	Sosa grr
+	
+	ShoutOut GetFirstRoot pisyat a $ b $ Discr pisyat a $ b $ c dva dva grr
+	ShoutOut GetSecondRoot pisyat a $ b $ Discr pisyat a $ b $ c dva dva grr
+	
+	FuckTwelve 0 grr
+Sosa grr

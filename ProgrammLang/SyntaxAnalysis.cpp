@@ -186,7 +186,7 @@ Node* GetOperator(Node** token_array, int* token_counter, NameTable* name_table)
     if (while_node != nullptr) return while_node;
 
     // Check Return
-    Node* return_node = GetReturnPrint(token_array, token_counter, name_table);
+    Node* return_node = GetSimpleOperators(token_array, token_counter, name_table);
 
     if (return_node != nullptr) return return_node;
 
@@ -317,19 +317,23 @@ Node* GetWhile(Node** token_array, int* token_counter, NameTable* name_table) {
     return token_array[*token_counter];
 }
 
-Node* GetReturnPrint(Node** token_array, int* token_counter, NameTable* name_table) {
+Node* GetSimpleOperators(Node** token_array, int* token_counter, NameTable* name_table) {
 
     assert(token_array != nullptr);
     assert(token_counter != nullptr);
     assert(name_table != nullptr);
 
-    printf("Searching Return or Print %d\n", *token_counter);
+    printf("Searching SimpleOperators %d\n", *token_counter);
 
     int old_counter = *token_counter;
 
-    if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_RETURN &&
-        GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_PRINT) {
-        printf("Return and print IS NOT FOUND\n");
+    if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_RETURN    &&
+        GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_PRINT     &&
+        GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_INPUT_NUM &&
+        GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_VRAM_PRINT) {
+
+        printf("SimpleOperators IS NOT FOUND\n");
+
         return nullptr;
     }
 
@@ -359,7 +363,7 @@ Node* GetFuncParams(Node** token_array, int* token_counter, NameTable* name_tabl
     Node* res_var = res;
 
     res_var->left = token_array[*token_counter - 1];
-    // NameTableInsert(name_table, token_array[*token_counter - 1]->data.value.var.name, ARGUMENT);
+    NameTableInsert(name_table, token_array[*token_counter - 1]->data.value.var.name, ARGUMENT);
 
     while (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
 

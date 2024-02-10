@@ -5,7 +5,7 @@
 #include "../../../NameTable.h"
 #include "super_io.h"
 
-#define MAX_TREE_STR_SIZE 10000
+#define MAX_TREE_STR_SIZE 110000
 
 const int	MAX_NAME_SIZE	   = 1000;
 const int	OPEN_BRACKET_SIZE  = 1;
