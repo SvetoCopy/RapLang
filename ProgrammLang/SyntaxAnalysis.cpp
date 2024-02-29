@@ -145,7 +145,9 @@ Node* GetOperatorWithBrackets(Node** token_array, int* token_counter, NameTable*
     printf("Searching Op with bracket\n");
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_OPEN_BRACKET_2) {
+
         printf("Op with brackets is not found\n");
+        
         return nullptr;
     }
 
@@ -156,7 +158,8 @@ Node* GetOperatorWithBrackets(Node** token_array, int* token_counter, NameTable*
     token_array[*token_counter];
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_2) {
-        printf("skipped close bracket in line %d", token_array[*token_counter]->line_num);
+
+        printf("skipped close bracket in line %zu", token_array[*token_counter]->line_num);
         assert(0);
     }
 
@@ -185,7 +188,7 @@ Node* GetOperator(Node** token_array, int* token_counter, NameTable* name_table)
 
     if (while_node != nullptr) return while_node;
 
-    // Check Return
+    // Check SimpleOperators
     Node* return_node = GetSimpleOperators(token_array, token_counter, name_table);
 
     if (return_node != nullptr) return return_node;
@@ -201,6 +204,21 @@ Node* GetOperator(Node** token_array, int* token_counter, NameTable* name_table)
         }
 
         token_array[*token_counter]->left = assign_node;
+
+        return token_array[*token_counter];
+    }
+
+    // Check func calling
+    Node* func_node = GetFuncCallOrVar(token_array, token_counter, name_table);
+
+    if (func_node != nullptr) {
+
+        if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_END1) {
+            printf("skipped end char in line %d", token_array[*token_counter]->line_num);
+            assert(0);
+        }
+
+        token_array[*token_counter]->left = func_node;
 
         return token_array[*token_counter];
     }
@@ -227,7 +245,8 @@ Node* GetCondition(Node** token_array, int* token_counter, NameTable* name_table
     Node* condition = GetLogicalOperations(token_array, token_counter, name_table);
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
-        printf("skipped close bracket in line %d", token_array[*token_counter]->line_num);
+
+        printf("skipped close bracket in line %zu", token_array[*token_counter]->line_num);
         assert(0);
     }
         
@@ -246,7 +265,9 @@ Node* GetIf(Node** token_array, int* token_counter, NameTable* name_table) {
 
     int old_counter = *token_counter;
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_IF) {
+        
         printf("IF NOT FOUND\n");
+
         return nullptr;
     }
 
@@ -258,7 +279,9 @@ Node* GetIf(Node** token_array, int* token_counter, NameTable* name_table) {
     Node* condition = GetCondition(token_array, token_counter, name_table);
 
     if (condition == nullptr) {
+
         printf("IF NOT FOUND\n");
+
         return nullptr;
     }
 
@@ -270,7 +293,8 @@ Node* GetIf(Node** token_array, int* token_counter, NameTable* name_table) {
     printf("SUCCESS IF\n");
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_END1) {
-        printf("skipped end char in line %d", token_array[*token_counter]->line_num);
+
+        printf("skipped end char in line %zu", token_array[*token_counter]->line_num);
         assert(0);
     }
     token_array[*token_counter]->left = token_array[old_counter];
@@ -289,9 +313,12 @@ Node* GetWhile(Node** token_array, int* token_counter, NameTable* name_table) {
     int old_counter = *token_counter;
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_WHILE) {
+
         printf("WHILE IS NOT FOUND\n");
+
         return nullptr;
     }
+
     (*token_counter)++;
 
     Node* condition = GetCondition(token_array, token_counter, name_table);
@@ -308,7 +335,7 @@ Node* GetWhile(Node** token_array, int* token_counter, NameTable* name_table) {
 
     if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_END1) {
 
-        printf("skipped end char in line %d", token_array[*token_counter]->line_num);
+        printf("skipped end char in line %zu", token_array[*token_counter]->line_num);
         assert(0);
     }
 
@@ -364,6 +391,13 @@ Node* GetFuncParams(Node** token_array, int* token_counter, NameTable* name_tabl
 
     res_var->left = token_array[*token_counter - 1];
     NameTableInsert(name_table, token_array[*token_counter - 1]->data.value.var.name, ARGUMENT);
+
+    if (GET_OPERATOR_TYPE(token_array[*token_counter]) == OPERATOR_CLOSE_BRACKET_1) {
+
+        res_var = CreateOperatorNode(OPERATOR_ARG_SEP, token_array[*token_counter - 1], nullptr);
+
+        return res_var;
+    }
 
     while (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
 
@@ -516,6 +550,13 @@ Node* GetFuncArgs(Node** token_array, int* token_counter, NameTable* name_table)
 
     res_var->left = expr_arg;
 
+    if (GET_OPERATOR_TYPE(token_array[*token_counter]) == OPERATOR_CLOSE_BRACKET_1) {
+
+        res_var = CreateOperatorNode(OPERATOR_ARG_SEP, expr_arg, nullptr);
+
+        return res_var;
+    }
+
     while (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
 
         (*token_counter)++;
@@ -562,6 +603,38 @@ Node* GetPow(Node** token_array, int* token_counter, NameTable* name_table) {
     return first_val;
 }
 
+Node* GetFuncCallOrVar(Node** token_array, int* token_counter, NameTable* name_table) {
+
+    assert(token_array != nullptr);
+    assert(token_counter != nullptr);
+    assert(name_table != nullptr);
+
+    Node* val = GetIdentifier(token_array, token_counter);
+
+    if (val != nullptr) {
+
+        if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_OPEN_BRACKET_1)
+            return val;
+
+        (*token_counter)++;
+
+        Node* arg = GetFuncArgs(token_array, token_counter, name_table);
+
+        val->data.type = FUNCTION;
+        val->left = arg;
+
+        if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
+
+            printf("Skipped close bracket in line %zu", token_array[*token_counter]->line_num);
+            assert(0);
+        }
+
+        (*token_counter)++;
+    }
+
+    return val;
+}
+
 Node* GetPrimary(Node** token_array, int* token_counter, NameTable* name_table) {
 
     assert(token_array != nullptr);
@@ -582,32 +655,8 @@ Node* GetPrimary(Node** token_array, int* token_counter, NameTable* name_table) 
     int old_counter = *token_counter;
     val = GetNum(token_array, token_counter, name_table);
 
-    if (old_counter == *token_counter) {
-
-        val = GetIdentifier(token_array, token_counter);
-
-        if (val != nullptr) {
-
-            if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_OPEN_BRACKET_1)
-                return val;
-
-            (*token_counter)++;
-
-            old_counter = *token_counter;
-
-            Node* arg = GetFuncArgs(token_array, token_counter, name_table);
-
-            val->data.type = FUNCTION;
-            val->left = arg;
-
-            if (GET_OPERATOR_TYPE(token_array[*token_counter]) != OPERATOR_CLOSE_BRACKET_1) {
-                printf("Skipped close bracket in line %d", token_array[*token_counter]->line_num);
-                assert(0);
-            }
-
-            (*token_counter)++;
-        }
-    }
+    if (old_counter == *token_counter)
+        val = GetFuncCallOrVar(token_array, token_counter, name_table);
 
     return val;
 }

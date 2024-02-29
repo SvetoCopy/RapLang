@@ -8,6 +8,32 @@ int GetNextOperId() {
 	return n;
 }   
 
+void PushAllVariables(FILE* asm_code, NameTable name_table) {
+
+	assert(asm_code != nullptr);
+
+	if (name_table.size == 0)
+		return;
+
+	for (size_t i = 0; i < name_table.size; i++) {
+
+		fprintf(asm_code, "PUSH [%d] ; saving %zu arg\n", name_table.table[i].address, i);
+	}
+}
+
+void PopAllVariables(FILE* asm_code, NameTable name_table) {
+
+	assert(asm_code != nullptr);
+
+	if (name_table.size == 0)
+		return;
+
+	for (int i = name_table.size - 1; i >= 0; i--) {
+
+		fprintf(asm_code, "POP [%d]; getting old %d arg\n", name_table.table[i].address, i);
+	}
+}
+
 void GiveArg(FILE* asm_code, Node* arg, NameTableElem param, NameTable name_table, ProgrammNameTables table) {
 
 	assert(asm_code != nullptr);
@@ -68,7 +94,9 @@ void RetranslateVariable(Node* node, FILE* asm_code, NameTable name_table) {
 
 	for (size_t i = 0; i < name_table.size; i++) {
 		if (strcmp(name_table.table[i].name, NODE_VAR_NAME(node)) == 0) {
+
 			fprintf(asm_code, "[%d]", name_table.table[i].address);
+
 			return;
 		}
 	}
@@ -101,9 +129,13 @@ void RetranslateNodeToASM(Node* node, FILE* asm_code, NameTable name_table, Prog
 
 	if (GET_NODE_TYPE(node) == FUNCTION) {
 
-		GiveArgs(node, asm_code, table, name_table);
+		PushAllVariables(asm_code, name_table);
 
+		GiveArgs(node, asm_code, table, name_table);
 		fprintf(asm_code, "CALL %s\n", node->data.value.var.name);
+
+		PopAllVariables(asm_code, name_table);
+
 		fprintf(asm_code, "PUSH RAX\n");
 		
 		return;
@@ -128,6 +160,7 @@ void RetranslateTreeToASM(Tree* tree, FILE* asm_code, ProgrammNameTables table) 
 	Node* var_node = tree->root;
 
 	for (int i = 0; i < table.size; i++) {
+		printf("local table number %d\n", i);
 		RetranslateNodeToASM(var_node->left, asm_code, table.local_tables[i], table);
 		var_node = var_node->right;
 	}

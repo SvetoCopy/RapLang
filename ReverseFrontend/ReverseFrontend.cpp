@@ -1,6 +1,15 @@
 #include "ReverseFrontend.h"
 
-void RetranslateNodeToLang(Node* node, FILE* lang_file) {
+void AlignStr(FILE* lang_file, int tab_count) {
+
+	assert(lang_file != nullptr);
+	
+	for (int i = 0; i < tab_count; i++) {
+		fprintf(lang_file, "\t");
+	}
+}
+
+void RetranslateNodeToLang(Node* node, FILE* lang_file, int tab_count) {
 
 	assert(lang_file != nullptr);
 
@@ -17,7 +26,7 @@ void RetranslateNodeToLang(Node* node, FILE* lang_file) {
 	if (GET_NODE_TYPE(node) == FUNCTION) {
 
 		fprintf(lang_file, "%s pisyat ", NODE_VAR_NAME(node));
-		RetranslateNodeToLang(node->left, lang_file);
+		RetranslateNodeToLang(node->left, lang_file, tab_count);
 		fprintf(lang_file, " dva ");
 
 		return;
@@ -25,7 +34,7 @@ void RetranslateNodeToLang(Node* node, FILE* lang_file) {
 
 	if (GET_NODE_TYPE(node) == NUM) {
 
-		fprintf(lang_file, "%d", NODE_IMM_VALUE(node));
+		fprintf(lang_file, "%lf", NODE_IMM_VALUE(node));
 
 		return;
 	}
@@ -46,4 +55,12 @@ void RetranslateNodeToLang(Node* node, FILE* lang_file) {
 	else {
 		assert(0);
 	}
+}
+
+void RetranslateTreeToLang(Tree* tree, FILE* lang_file) {
+
+	assert(lang_file != nullptr);
+	assert(tree != nullptr);
+	
+	RetranslateNodeToLang(tree->root, lang_file, 0);
 }

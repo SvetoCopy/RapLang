@@ -1,92 +1,14 @@
 CALL main
 HLT
-SolveLinear:
+Factorial:
 
 ; the next operator has gone from 2 line
-PUSH 0.000000
-PUSH [1]
-SUB
 PUSH [0]
-DIV
-POP RAX
-RET
-Discr:
+OUT
 
-; the next operator has gone from 5 line
-PUSH [3]
-PUSH [3]
-MUL
-PUSH 0.000000
-PUSH [2]
-MUL
-PUSH [4]
-MUL
-SUB
-POP RAX
-RET
-GetFirstRoot:
-
-; the next operator has gone from 8 line
-PUSH 0.000000
-PUSH [6]
-SUB
-PUSH [7]
-PUSH 0.000000
-PUSH 0.000000
-DIV
-POW
-ADD
-PUSH 0.000000
-PUSH [5]
-MUL
-DIV
-POP RAX
-RET
-GetSecondRoot:
-
-; the next operator has gone from 11 line
-PUSH 0.000000
-PUSH [9]
-SUB
-PUSH [10]
-PUSH 0.000000
-PUSH 0.000000
-DIV
-POW
-SUB
-PUSH 0.000000
-PUSH [8]
-MUL
-DIV
-POP RAX
-RET
-main:
-
-; the next operator has gone from 14 line
-PUSH 0.000000
-POP [11]
-
-; the next operator has gone from 15 line
-PUSH 0.000000
-POP [12]
-
-; the next operator has gone from 16 line
-PUSH 0.000000
-POP [13]
-
-; the next operator has gone from 17 line
-IN
-POP [11]
-
-; the next operator has gone from 18 line
-IN
-POP [12]
-
-; the next operator has gone from 19 line
-IN
-POP [13]
-
-; the next operator has gone from 20 line
+; the next operator has gone from 3 line
+PUSH 1.000000
+PUSH [0]
 JE cond_1
 PUSH 0
 JMP end_cond2
@@ -96,72 +18,47 @@ end_cond2:
 PUSH 0
 JE end_if_3
 
-; the next operator has gone from 21 line
-PUSH [12]
-
-POP [0]
-PUSH [13]
-
-POP [1]
-CALL SolveLinear
-PUSH RAX
-OUT
-
-; the next operator has gone from 22 line
-PUSH 0.000000
+; the next operator has gone from 4 line
+PUSH 1.000000
 POP RAX
 RET
 end_if_3:
 
-; the next operator has gone from 24 line
-PUSH [11]
+; the next operator has gone from 7 line
+PUSH [0]
+PUSH [0] ; saving 0 arg
+PUSH [1] ; saving 1 arg
+PUSH [0]
+PUSH 1.000000
+SUB
 
-POP [5]
-PUSH [12]
-
-POP [6]
-PUSH [11]
-
-POP [2]
-PUSH [12]
-
-POP [3]
-PUSH [13]
-
-POP [4]
-CALL Discr
+POP [0]
+CALL Factorial
+POP [1]; getting old 1 arg
+POP [0]; getting old 0 arg
 PUSH RAX
+MUL
+POP [1]
 
-POP [7]
-CALL GetFirstRoot
+; the next operator has gone from 8 line
+PUSH [0]
+OUT
+
+; the next operator has gone from 10 line
+PUSH [1]
+POP RAX
+RET
+main:
+
+; the next operator has gone from 14 line
+PUSH 3.000000
+
+POP [0]
+CALL Factorial
 PUSH RAX
 OUT
 
-; the next operator has gone from 25 line
-PUSH [11]
-
-POP [8]
-PUSH [12]
-
-POP [9]
-PUSH [11]
-
-POP [2]
-PUSH [12]
-
-POP [3]
-PUSH [13]
-
-POP [4]
-CALL Discr
-PUSH RAX
-
-POP [10]
-CALL GetSecondRoot
-PUSH RAX
-OUT
-
-; the next operator has gone from 26 line
+; the next operator has gone from 15 line
 PUSH 0.000000
 POP RAX
 RET

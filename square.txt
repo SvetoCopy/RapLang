@@ -14,6 +14,25 @@ VVS GetSecondRoot pisyat a $ b $ D dva Love
 	FuckTwelve pisyat pisyat 0 - b dva - D ^ pisyat 1 / 2 dva dva / pisyat 2 * a dva  grr
 Sosa grr
 
+VVS PrintNoRoots pisyat dva Love
+	PawPaw 78 grr
+	PawPaw 79 grr
+
+	PawPaw 10 grr
+
+	FuckTwelve 0 grr
+Sosa grr
+
+VVS PrintInfRoots pisyat dva Love
+	PawPaw 73 grr
+	PawPaw 78 grr
+	PawPaw 70 grr
+
+	PawPaw 10 grr
+
+	FuckTwelve 0 grr
+Sosa grr
+
 VVS main pisyat dva Love
 
 	Bless a To 0 grr
@@ -25,12 +44,40 @@ VVS main pisyat dva Love
 	PullUp c grr
 
 	LegitCheck pisyat  a is 0 dva Love
+		
+		LegitCheck pisyat  b is 0 dva Love
+			LegitCheck pisyat  c is 0 dva Love
+				PrintInfRoots pisyat dva grr
+
+				FuckTwelve 0 grr
+			Sosa grr
+			
+			PrintNoRoots pisyat dva grr
+
+			FuckTwelve 0 grr
+		Sosa grr
+
 		ShoutOut SolveLinear pisyat b $ c dva grr
+
+		FuckTwelve 0 grr
+	Sosa grr
+
+	Bless D To Discr pisyat a $ b $ c dva grr
+
+	LegitCheck pisyat  D < 0 dva Love
+
+		PrintNoRoots pisyat dva grr
+
+		FuckTwelve 0 grr
+	Sosa grr
+
+	LegitCheck pisyat  D is 0 dva Love
+
+		ShoutOut GetFirstRoot pisyat a $ b $ D dva grr
+
 		FuckTwelve 0 grr
 	Sosa grr
 	
-	ShoutOut GetFirstRoot pisyat a $ b $ Discr pisyat a $ b $ c dva dva grr
-	ShoutOut GetSecondRoot pisyat a $ b $ Discr pisyat a $ b $ c dva dva grr
 	
 	FuckTwelve 0 grr
 Sosa grr

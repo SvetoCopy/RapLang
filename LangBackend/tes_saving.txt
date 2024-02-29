@@ -1,496 +1,145 @@
-Functions [5] {
-    ["SolveLinear", 0, 1]
-    ["Discr", 1, 1]
-    ["GetFirstRoot", 2, 1]
-    ["GetSecondRoot", 3, 1]
-    ["main", 4, 1]
+Functions [2] {
+    ["Factorial", 0, 1]
+    ["main", 1, 1]
 }
 
-SolveLinear [2] {
-    ["b", 0, 0]
-    ["c", 1, 0]
+Factorial [2] {
+    ["n", 0, 0]
+    ["a", 1, 1]
 }
 
-Discr [3] {
-    ["a", 0, 0]
-    ["b", 1, 0]
-    ["c", 2, 0]
-}
-
-GetFirstRoot [3] {
-    ["a", 0, 0]
-    ["b", 1, 0]
-    ["D", 2, 0]
-}
-
-GetSecondRoot [3] {
-    ["a", 0, 0]
-    ["b", 1, 0]
-    ["D", 2, 0]
-}
-
-main [3] {
-    ["a", 0, 1]
-    ["b", 1, 1]
-    ["c", 2, 1]
+main [0] {
 }
 
 Tree: {
-  (grr line = 3 type = 3
+  (grr line = 11 type = 3
     (VVS line = 1 type = 3
-      (SolveLinear line = 1 type = 4
-        ($ line = 1 type = 3
-          (b line = 1 type = 2
+      (Factorial line = 1 type = 4
+        ($ line = 0 type = 3
+          (n line = 1 type = 2
              .
              .
           )
-          ($ line = 0 type = 3
-            (c line = 1 type = 2
-               .
-               .
-            )
-             .
-          )
+           .
         )
          .
       )
       (grr line = 2 type = 3
-        (FuckTwelve line = 2 type = 3
-          (/ line = 2 type = 3
-            (- line = 2 type = 3
-              (0.000000 line = 2 type = 0
-                 .
-                 .
-              )
-              (c line = 2 type = 2
-                 .
-                 .
-              )
-            )
-            (b line = 2 type = 2
-               .
-               .
-            )
-          )
-           .
-        )
-         .
-      )
-    )
-    (grr line = 6 type = 3
-      (VVS line = 4 type = 3
-        (Discr line = 4 type = 4
-          ($ line = 4 type = 3
-            (a line = 4 type = 2
-               .
-               .
-            )
-            ($ line = 4 type = 3
-              (b line = 4 type = 2
-                 .
-                 .
-              )
-              ($ line = 0 type = 3
-                (c line = 4 type = 2
-                   .
-                   .
-                )
-                 .
-              )
-            )
+        (ShoutOut line = 2 type = 3
+          (n line = 2 type = 2
+             .
+             .
           )
            .
         )
         (grr line = 5 type = 3
-          (FuckTwelve line = 5 type = 3
-            (- line = 5 type = 3
-              (* line = 5 type = 3
-                (b line = 5 type = 2
-                   .
-                   .
-                )
-                (b line = 5 type = 2
-                   .
-                   .
-                )
+          (LegitCheck line = 3 type = 3
+            (is line = 3 type = 3
+              (n line = 3 type = 2
+                 .
+                 .
               )
-              (* line = 5 type = 3
-                (* line = 5 type = 3
-                  (0.000000 line = 5 type = 0
-                     .
-                     .
-                  )
-                  (a line = 5 type = 2
-                     .
-                     .
-                  )
-                )
-                (c line = 5 type = 2
-                   .
-                   .
-                )
+              (1.000000 line = 3 type = 0
+                 .
+                 .
               )
             )
-             .
+            (grr line = 4 type = 3
+              (FuckTwelve line = 4 type = 3
+                (1.000000 line = 4 type = 0
+                   .
+                   .
+                )
+                 .
+              )
+               .
+            )
           )
-           .
-        )
-      )
-      (grr line = 9 type = 3
-        (VVS line = 7 type = 3
-          (GetFirstRoot line = 7 type = 4
-            ($ line = 7 type = 3
+          (grr line = 7 type = 3
+            (Bless line = 7 type = 3
+              (* line = 7 type = 3
+                (n line = 7 type = 2
+                   .
+                   .
+                )
+                (Factorial line = 7 type = 4
+                  ($ line = 0 type = 3
+                    (- line = 7 type = 3
+                      (n line = 7 type = 2
+                         .
+                         .
+                      )
+                      (1.000000 line = 7 type = 0
+                         .
+                         .
+                      )
+                    )
+                     .
+                  )
+                   .
+                )
+              )
               (a line = 7 type = 2
                  .
                  .
               )
-              ($ line = 7 type = 3
-                (b line = 7 type = 2
+            )
+            (grr line = 8 type = 3
+              (ShoutOut line = 8 type = 3
+                (n line = 8 type = 2
                    .
                    .
                 )
-                ($ line = 0 type = 3
-                  (D line = 7 type = 2
+                 .
+              )
+              (grr line = 10 type = 3
+                (FuckTwelve line = 10 type = 3
+                  (a line = 10 type = 2
                      .
                      .
                   )
                    .
                 )
+                 .
               )
             )
-             .
-          )
-          (grr line = 8 type = 3
-            (FuckTwelve line = 8 type = 3
-              (/ line = 8 type = 3
-                (+ line = 8 type = 3
-                  (- line = 8 type = 3
-                    (0.000000 line = 8 type = 0
-                       .
-                       .
-                    )
-                    (b line = 8 type = 2
-                       .
-                       .
-                    )
-                  )
-                  (^ line = 8 type = 3
-                    (D line = 8 type = 2
-                       .
-                       .
-                    )
-                    (/ line = 8 type = 3
-                      (0.000000 line = 8 type = 0
-                         .
-                         .
-                      )
-                      (0.000000 line = 8 type = 0
-                         .
-                         .
-                      )
-                    )
-                  )
-                )
-                (* line = 8 type = 3
-                  (0.000000 line = 8 type = 0
-                     .
-                     .
-                  )
-                  (a line = 8 type = 2
-                     .
-                     .
-                  )
-                )
-              )
-               .
-            )
-             .
           )
         )
-        (grr line = 12 type = 3
-          (VVS line = 10 type = 3
-            (GetSecondRoot line = 10 type = 4
-              ($ line = 10 type = 3
-                (a line = 10 type = 2
+      )
+    )
+    (grr line = 16 type = 3
+      (VVS line = 13 type = 3
+        (main line = 13 type = 4
+           .
+           .
+        )
+        (grr line = 14 type = 3
+          (ShoutOut line = 14 type = 3
+            (Factorial line = 14 type = 4
+              ($ line = 0 type = 3
+                (3.000000 line = 14 type = 0
                    .
                    .
-                )
-                ($ line = 10 type = 3
-                  (b line = 10 type = 2
-                     .
-                     .
-                  )
-                  ($ line = 0 type = 3
-                    (D line = 10 type = 2
-                       .
-                       .
-                    )
-                     .
-                  )
-                )
-              )
-               .
-            )
-            (grr line = 11 type = 3
-              (FuckTwelve line = 11 type = 3
-                (/ line = 11 type = 3
-                  (- line = 11 type = 3
-                    (- line = 11 type = 3
-                      (0.000000 line = 11 type = 0
-                         .
-                         .
-                      )
-                      (b line = 11 type = 2
-                         .
-                         .
-                      )
-                    )
-                    (^ line = 11 type = 3
-                      (D line = 11 type = 2
-                         .
-                         .
-                      )
-                      (/ line = 11 type = 3
-                        (0.000000 line = 11 type = 0
-                           .
-                           .
-                        )
-                        (0.000000 line = 11 type = 0
-                           .
-                           .
-                        )
-                      )
-                    )
-                  )
-                  (* line = 11 type = 3
-                    (0.000000 line = 11 type = 0
-                       .
-                       .
-                    )
-                    (a line = 11 type = 2
-                       .
-                       .
-                    )
-                  )
                 )
                  .
               )
                .
             )
+             .
           )
-          (grr line = 27 type = 3
-            (VVS line = 13 type = 3
-              (main line = 13 type = 4
+          (grr line = 15 type = 3
+            (FuckTwelve line = 15 type = 3
+              (0.000000 line = 15 type = 0
                  .
                  .
               )
-              (grr line = 14 type = 3
-                (Bless line = 14 type = 3
-                  (0.000000 line = 14 type = 0
-                     .
-                     .
-                  )
-                  (a line = 14 type = 2
-                     .
-                     .
-                  )
-                )
-                (grr line = 15 type = 3
-                  (Bless line = 15 type = 3
-                    (0.000000 line = 15 type = 0
-                       .
-                       .
-                    )
-                    (b line = 15 type = 2
-                       .
-                       .
-                    )
-                  )
-                  (grr line = 16 type = 3
-                    (Bless line = 16 type = 3
-                      (0.000000 line = 16 type = 0
-                         .
-                         .
-                      )
-                      (c line = 16 type = 2
-                         .
-                         .
-                      )
-                    )
-                    (grr line = 17 type = 3
-                      (PullUp line = 17 type = 3
-                        (a line = 17 type = 2
-                           .
-                           .
-                        )
-                         .
-                      )
-                      (grr line = 18 type = 3
-                        (PullUp line = 18 type = 3
-                          (b line = 18 type = 2
-                             .
-                             .
-                          )
-                           .
-                        )
-                        (grr line = 19 type = 3
-                          (PullUp line = 19 type = 3
-                            (c line = 19 type = 2
-                               .
-                               .
-                            )
-                             .
-                          )
-                          (grr line = 23 type = 3
-                            (LegitCheck line = 20 type = 3
-                              (is line = 20 type = 3
-                                 .
-                                 .
-                              )
-                              (grr line = 21 type = 3
-                                (ShoutOut line = 21 type = 3
-                                  (SolveLinear line = 21 type = 4
-                                    ($ line = 21 type = 3
-                                      (b line = 21 type = 2
-                                         .
-                                         .
-                                      )
-                                      ($ line = 0 type = 3
-                                        (c line = 21 type = 2
-                                           .
-                                           .
-                                        )
-                                         .
-                                      )
-                                    )
-                                     .
-                                  )
-                                   .
-                                )
-                                (grr line = 22 type = 3
-                                  (FuckTwelve line = 22 type = 3
-                                    (0.000000 line = 22 type = 0
-                                       .
-                                       .
-                                    )
-                                     .
-                                  )
-                                   .
-                                )
-                              )
-                            )
-                            (grr line = 24 type = 3
-                              (ShoutOut line = 24 type = 3
-                                (GetFirstRoot line = 24 type = 4
-                                  ($ line = 24 type = 3
-                                    (a line = 24 type = 2
-                                       .
-                                       .
-                                    )
-                                    ($ line = 24 type = 3
-                                      (b line = 24 type = 2
-                                         .
-                                         .
-                                      )
-                                      ($ line = 0 type = 3
-                                        (Discr line = 24 type = 4
-                                          ($ line = 24 type = 3
-                                            (a line = 24 type = 2
-                                               .
-                                               .
-                                            )
-                                            ($ line = 24 type = 3
-                                              (b line = 24 type = 2
-                                                 .
-                                                 .
-                                              )
-                                              ($ line = 0 type = 3
-                                                (c line = 24 type = 2
-                                                   .
-                                                   .
-                                                )
-                                                 .
-                                              )
-                                            )
-                                          )
-                                           .
-                                        )
-                                         .
-                                      )
-                                    )
-                                  )
-                                   .
-                                )
-                                 .
-                              )
-                              (grr line = 25 type = 3
-                                (ShoutOut line = 25 type = 3
-                                  (GetSecondRoot line = 25 type = 4
-                                    ($ line = 25 type = 3
-                                      (a line = 25 type = 2
-                                         .
-                                         .
-                                      )
-                                      ($ line = 25 type = 3
-                                        (b line = 25 type = 2
-                                           .
-                                           .
-                                        )
-                                        ($ line = 0 type = 3
-                                          (Discr line = 25 type = 4
-                                            ($ line = 25 type = 3
-                                              (a line = 25 type = 2
-                                                 .
-                                                 .
-                                              )
-                                              ($ line = 25 type = 3
-                                                (b line = 25 type = 2
-                                                   .
-                                                   .
-                                                )
-                                                ($ line = 0 type = 3
-                                                  (c line = 25 type = 2
-                                                     .
-                                                     .
-                                                  )
-                                                   .
-                                                )
-                                              )
-                                            )
-                                             .
-                                          )
-                                           .
-                                        )
-                                      )
-                                    )
-                                     .
-                                  )
-                                   .
-                                )
-                                (grr line = 26 type = 3
-                                  (FuckTwelve line = 26 type = 3
-                                    (0.000000 line = 26 type = 0
-                                       .
-                                       .
-                                    )
-                                     .
-                                  )
-                                   .
-                                )
-                              )
-                            )
-                          )
-                        )
-                      )
-                    )
-                  )
-                )
-              )
+               .
             )
              .
           )
         )
       )
+       .
     )
   )
 }

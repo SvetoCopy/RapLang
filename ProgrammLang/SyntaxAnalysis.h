@@ -17,6 +17,8 @@ Node* GetSimpleOperators(Node** token_array, int* token_counter, NameTable* name
 Node* GetAssign(Node** token_array, int* counter, NameTable* name_table);
 Node* GetIdentifier(Node** token_array, int* counter);
 
+Node* GetFuncCallOrVar(Node** token_array, int* token_counter, NameTable* name_table);
+
 Node* GetPrimary(Node** token_array, int* counter, NameTable* name_table);
 Node* GetPow(Node** token_array, int* token_counter, NameTable* name_table);
 Node* GetLogicalOperations(Node** token_array, int* token_counter, NameTable* name_table);

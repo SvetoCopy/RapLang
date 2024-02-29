@@ -190,7 +190,24 @@ void ReadTree(FileInfo* file, ProgrammNameTables* table, Tree* tree) {
 
 		read_size = 0;
 
-		sscanf(file->buff, "%s size: %zu { %[^}] }%n", local_table_name, &local_table_size, local_table_str, &read_size);
+		int read_args_num = sscanf(file->buff, "%s size: %zu { %[^}] }%n", 
+												local_table_name, 
+												&local_table_size, 
+												local_table_str, 
+												&read_size);
+
+		if (read_args_num < 3) {
+
+			read_args_num = sscanf(file->buff, "%s size: %zu { }%n",
+				local_table_name,
+				&local_table_size,
+				&read_size);
+
+			start_address += local_table_size;
+			file->buff += read_size;
+
+			continue;
+		}
 
 		ReadNameTable(local_table_str, &(table->local_tables[i]), local_table_size, start_address);
 

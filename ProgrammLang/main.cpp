@@ -7,20 +7,17 @@
 
 int main(int argc, const char* argv[])
 {                              
-    if (argc < 3) {
-        printf("Usage: %s code.txt save_tree.txt\n", argv[0]);
+    if (argc < 4) {
+        printf("Usage: %s code.txt frontend_dump.gv save_tree.txt \n", argv[0]);
 
         return -1;
     }
-
-    setlocale(LC_CTYPE, "");
     
     FileInfo file = FileInfoCtor(argv[1]);
     ReadFile(&file);
 
     Node** node_array = ReadTokenArray(file.buff);
     PrintTokenArray(node_array);
-
 
     ProgrammNameTables table = {};
     ProgrammNameTablesCtor(&table);
@@ -29,13 +26,11 @@ int main(int argc, const char* argv[])
     Tree tree = {};
     NodeData_t start_data = {};
 
-    TreeCtor(&tree, "frontend_dump.gv", start_data);
+    TreeCtor(&tree, argv[2], start_data);
     tree.root = node;
 
-    //printf("%d", CheckTree(&tree, &table));
-
     FILE* file_save = {};
-    fopen_s(&file_save, argv[2], "w");
+    fopen_s(&file_save, argv[3], "w");
 
     SaveTree(&tree, file_save, &table);
 
