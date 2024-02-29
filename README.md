@@ -159,7 +159,7 @@ Sosa grr
 
 Тогда, получаем дерево:
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/32d4edf4-eb44-43f9-8435-e6f44669aebb)
+![image](https://github.com/SvetoCopy/RapLang/assets/65361271/f4f1fee9-e3e6-48b4-b4c0-79542c43da18)
 
 <h2>Backend</h2>
 <p>После получения дерева и таблиц имен, нужно преобразовать код из языка RapLang в <a href="https://github.com/SvetoCopy/CPU">ASM</a></p>
@@ -169,7 +169,7 @@ Sosa grr
 ```asm
 CALL main
 HLT
-Fib:
+Factorial:
 
 ; the next operator has gone from 2 line
 PUSH [0]
@@ -202,7 +202,7 @@ PUSH 1.000000
 SUB
 
 POP [0]
-CALL Fib
+CALL Factorial
 POP [1]; getting old 1 arg
 POP [0]; getting old 0 arg
 PUSH RAX
@@ -223,7 +223,7 @@ main:
 PUSH 3.000000
 
 POP [0]
-CALL Fib
+CALL Factorial
 PUSH RAX
 OUT
 
@@ -239,41 +239,45 @@ RET
 языке RapLang. Принцип его работы очень схож с работой Backend, программа также обрабатывает каждый узел и создает код.</p>
 <p>Давайте возьмем наш код для чисел Фиббоначи и пропустим его через Frontend, затем полученное дерево преобразуем обратно в код через ReverseFrontend. Затем сравним результат с исходным кодом.</p>
 
+<p>Исходный код:</p>
+
 ```
-VVS Fib pisyat n dva Love
+VVS Factorial pisyat n dva Love
 	ShoutOut n grr
 	LegitCheck pisyat n is 1 dva Love
 		FuckTwelve 1 grr
 	Sosa grr
 	
-	Bless a To n * Fib pisyat n - 1 dva grr 
+	Bless a To n * Factorial pisyat n - 1 dva grr 
 	ShoutOut n grr
 	
 	FuckTwelve a grr
 Sosa grr
 
 VVS main pisyat dva Love
-	ShoutOut Fib pisyat 3 dva grr
+	ShoutOut Factorial pisyat 3 dva grr
 	FuckTwelve 0 grr
 Sosa grr
 ```
 
+<p>Полученный код:</p>
+
 ```
-VVS Fib pisyat  dva  Love
+VVS Factorial pisyat n dva  Love
 	ShoutOut n grr
 	LegitCheck pisyat  is  dva Love 
 		FuckTwelve 1.000000 grr
 	Sosa  grr
-	Bless a To  pisyat n * Fib pisyat  dva  dva  grr
+	Bless a To  pisyat n * Factorial pisyat  pisyat n - 1.000000 dva  dva  dva  grr
 	ShoutOut n grr
 	FuckTwelve a grr
 Sosa  grr
 VVS main pisyat  dva  Love
-	ShoutOut Fib pisyat  dva  grr
+	ShoutOut Factorial pisyat 3.000000 dva  grr
 	FuckTwelve 0.000000 grr
 Sosa  grr
-
 ```
+<p>Как видим, минимальный различия</p>
 
 
 
