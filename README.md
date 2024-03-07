@@ -1,17 +1,16 @@
 <h1>RapLang by Ruzal</h1>
 <h2>Frontend</h2>
-<p>RapLang - Тьюринг-полный язык, позволяющий программировать на нем даже современным русским рэперам</p>
-
+<p>RapLang - Тьюринг-полный язык, позволяющий программировать на нем даже современным русским рэперам.</p>
 <h3>Синтаксис</h3>
-<p>Синтаксис RapLang похож на синтаксис языка C, поэтому описание будет происходить в сравнении с ним</p>
-<p>Прежде всего важно отметить, что RapLang работает на методе <a href="https://habr.com/ru/articles/489534/">Рекурсивного спуска</a>.</p>
+<p>Синтаксис RapLang похож на синтаксис языка C, поэтому описание будет происходить отталкиваясь от него</p>
+
 
 <h4>Переменные</h4>
 <p>Объявление переменной выполняется с помощью команды:</p>
 
-```
-Bless name To expr grr
-```
+| RapLang                      | C                      |
+|------------------------------|------------------------|
+| ```Bless name To expr grr``` | ```int name = expr;``` |
 
 <p>Объявление переменной без инициализации невозможно в RapLang</p>
 <p>После любого объявления, необходимо явно обозначить конец команды с помощью 'grr' </p>
@@ -31,61 +30,30 @@ name = { {'A'-'Z'} || {'a'-'z'} || {'0'-'9'} || '_' } +
 
 <p>Условные операторы:</p>
 
-```
-LegitCheck pisyat condition dva Love
-        body
-Sosa grr
-```
-
-Что эквивалентно:
-
-```c
-if (condition) {
-        body
-}
-```
+| RapLang                                                | C                                |
+|--------------------------------------------------------|----------------------------------|
+| ```LegitCheck pisyat condition dva Love body Sosa ``` | ```if ( condition ) { body } ``` |
 
 <p>За исключением того, что в RapLang нужно заканчивать условный оператор с помощью 'grr'</p>
+
 <p>Циклы:</p>
 
-```
-Sesh pisyat condition dva Love
-        body
-Sosa grr
-```
-
-Что эквивалентно:
-
-```c
-while (condition) {
-        body
-}
-```
+| RapLang                                             | C                                 |
+|-----------------------------------------------------|-----------------------------------|
+| ```Sesh pisyat condition dva Love body Sosa grr ``` | ```while (condition) { body } ``` |
 
 <h4>Функции</h4>
 
-RapLang:
-
-```
-VVS main pisyat arg1 $ arg2 $ arg3 dva Love
-        body
-Sosa grr         
-```
-
-C:
-
-```c
-void main( int arg1, int arg2, int arg3) {
-        body
-}
-```
+| RapLang                                                                | C                                                             |
+|------------------------------------------------------------------------|---------------------------------------------------------------|
+| ```VVS name pisyat arg1 $ arg2 $ arg3 $ ... dva Love body Sosa grr ``` | ```void name( int arg1, int arg2, int arg3, ...) { body } ``` |
 
 <h4>Остальные операторы</h4>
 
 | Оператор        | Описание                                                        | Пример                        |
 |-----------------|-----------------------------------------------------------------|-------------------------------|
 | FuckTwelve      | Эквивалент return из языка C                                    | FuckTwelve 1 grr              |
-| *, /, ^, +, -   | Стандартные операции                                            | -                             |
+| *, /, ^, +, -   | Стандартные арифметические операции                             | -                             |
 | >, <, \|, &, is | Стандартные логические операции Замечание: 'is' - это '==' из C | -                             |
 | ShoutOut        | Выводит число в консоль                                         | ShoutOut 4 grr                |
 | PullUp          | Ввод числа с консоли                                            | Bless a To 0 grr PullUp a grr |
@@ -94,46 +62,50 @@ void main( int arg1, int arg2, int arg3) {
 
 <h2>Что делает Frontend?</h2>
 <p>По итогу, код на языке RapLang преобразуется в дерево, попутно Frontend создает для каждой функции свою локальную таблицу</p>
+<p>RapLang работает на методе <a href="https://habr.com/ru/articles/489534/">Рекурсивного спуска</a>.</p>
 
 <h3>Правила построения дерева</h3>
 <h4>Обьединение команд</h4>
 <p>Прежде всего, из синтаксиса мы помним, что все операторы, функции разделяются с помощью <b>grr</b>. Все дерево строится на узлах из этих окончательных символов:</p>
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/a2895803-bbd3-4810-935e-9b70109ed4ca)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/fba188e2-e375-4c58-bdbb-d655b6e925fb)
+
 
 <h4>Условные операторы, циклы, определение переменных</h4>
 
 Условные операторы:
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/15fa6564-9e56-4d3f-bca1-047dd7474f2c)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/f7b9fc3c-5474-44e8-bbb8-7cc262382946)
 
 Циклы:
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/09a766a0-2fa4-4bfa-924d-eaef54d9f2b9)
-
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/13895e4e-3a16-41a3-9c5d-463b34a5c82a)
 
 Определение переменных:
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/e3159dac-aa06-4331-8dc6-94aec500d195)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/4038066e-519a-46e9-97a7-63b49a3fe414)
+
 
 <h4>Функции</h4>
 Ниже представлено построенное дерево для объявления функции:
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/2fd3a246-a3c0-4fe0-a07d-0258da1aad5d)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/0d7d943e-e323-4512-814d-c5ab6cf0de60)
+
 
 Вот так выглядит вызов функции:
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/b7344b54-ac99-49e3-9452-40328fc89886)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/eaf0688a-0155-4054-b062-e323fb1bfbeb)
+
 
 <h4>Стандартные операции</h4>
-Построение стандартных операций очевидно. Это построение дерева для *, /, ^, +, -, >, <, \|, &, is
+Построение арифметических стандартных операций очевидно. Это построение дерева для *, /, ^, +, -, >, <, \|, &, is
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/a34e2636-240e-4fe9-a35a-f2b4e706e56d)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/1c44f6e5-1b59-422d-9d97-52b35db2d6c8)
 
 <h4>Команды с одним аргументом</h4>
 Это такие команды, как ShoutOut, FuckTwelve, PullUp, PawPaw
 
-![image](https://github.com/SvetoCopy/RapLang/assets/65361271/36b71363-7954-494f-9920-ea12fbd2dffe)
+![example1](https://github.com/SvetoCopy/RapLang/assets/65361271/e8350f4b-a558-4059-b827-6e56e0bbe998)
 
 <h4>Пример</h4>
 <p>Посмотрим как это выглядит для небольшой программы, которая считает числа Фиббоначи:</p>
@@ -157,13 +129,13 @@ VVS main pisyat dva Love
 Sosa grr
 ```
 
-Тогда, получаем дерево:
+Тогда, получаем дерево, построенное с помощью GraphViz:
 
 ![image](https://github.com/SvetoCopy/RapLang/assets/65361271/f4f1fee9-e3e6-48b4-b4c0-79542c43da18)
 
 <h2>Backend</h2>
-<p>После получения дерева и таблиц имен, нужно преобразовать код из языка RapLang в <a href="https://github.com/SvetoCopy/CPU">ASM</a></p>
-<p>Подробно процесс преобразования описан в LangBackend/def_operator.h. Таким образом, мы можем запустить нашу программу в <a href="https://github.com/SvetoCopy/CPU">ASM</a></p>
+<p>После получения дерева и таблиц имен, нужно транслировать код из языка RapLang в <a href="https://github.com/SvetoCopy/CPU">ASM</a></p>
+<p>Подробно трансляция описана в LangBackend/def_operator.h. Таким образом, мы можем запустить нашу программу в <a href="https://github.com/SvetoCopy/CPU">ASM</a>. Это такой проект, который эмулирует работу реального процессора</p>
 <p>Вот так выглядит <a href="https://github.com/SvetoCopy/CPU">ASM</a> код для нашего примера с числами Фиббоначи, сгенерированного с помощью  Backend:</p>
 
 ```asm
@@ -232,12 +204,14 @@ PUSH 0.000000
 POP RAX
 RET
 ```
+<p>Комментарии вставляются автоматически для отображения строки, которую мы транслируем</p>
+
 
 <h2>ReverseFrontend</h2>
 <p>Связка Frontend + Backend достаточна для компиляции кода на языке RapLang. ReverseFrontend же выполняет совсем иную функцию.</p>
 <p>Пусть у нас есть построенное дерево и таблицы имен для Backend. ReverseFrontend переводит из этого дерева в код на
 языке RapLang. Принцип его работы очень схож с работой Backend, программа также обрабатывает каждый узел и создает код.</p>
-<p>Давайте возьмем наш код для чисел Фиббоначи и пропустим его через Frontend, затем полученное дерево преобразуем обратно в код через ReverseFrontend. Затем сравним результат с исходным кодом.</p>
+<p>Давайте возьмем наш код для чисел Фиббоначи и пропустим его через Frontend, затем полученное дерево транслируем обратно в код через ReverseFrontend. Затем сравним результат с исходным кодом.</p>
 
 <p>Исходный код:</p>
 
@@ -265,7 +239,7 @@ Sosa grr
 ```
 VVS Factorial pisyat n dva  Love
 	ShoutOut n grr
-	LegitCheck pisyat  is  dva Love 
+	LegitCheck pisyat n is 1.000000 dva Love 
 		FuckTwelve 1.000000 grr
 	Sosa  grr
 	Bless a To  pisyat n * Factorial pisyat  pisyat n - 1.000000 dva  dva  dva  grr
@@ -277,7 +251,7 @@ VVS main pisyat  dva  Love
 	FuckTwelve 0.000000 grr
 Sosa  grr
 ```
-<p>Как видим, минимальный различия</p>
+<p>Как видим, минимальные различия</p>
 
 
 
