@@ -7,6 +7,7 @@
 
 int main(int argc, const char* argv[])
 {                              
+
     if (argc < 4) {
         printf("Usage: %s code.txt frontend_dump.gv save_tree.txt \n", argv[0]);
 
